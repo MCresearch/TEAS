@@ -1,6 +1,6 @@
 # A caveat of the charge-extrapolation scheme for modeling electrochemical reactions on semiconductor surfaces: an issue induced by a discontinuous Fermi level change
 
-DOI: 10.1039/d2cp00642a
+DOI: https://doi.org/10.1039/D2CP00642A
 
 (Photo)electrochemical surface reactions in realistic experimental systems occur under a constant-
 potential condition, while the ab initio simulations of electrochemical reactions are mostly performed
