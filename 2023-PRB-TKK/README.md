@@ -1,0 +1,5 @@
+# Truncated nonlocal kinetic energy density functionals for simple metals and silicon
+
+DOI: 10.1103/PhysRevB.108.075158
+
+The adoption of an accurate kinetic energy density functional (KEDF) to characterize the noninteracting kinetic energy within the framework of orbital-free density functional theory (OFDFT) is challenging. We propose a form of the nonlocal KEDF with a real-space truncation cutoff that satisfies the uniform electron gas limit and design KEDFs for simple metals and silicon. These KEDFs are obtained by minimizing a residual function, which contains the differences in the total energy and charge density of several representative systems with respect to the Kohn-Sham DFT results. By systematically testing different cutoffs of these KEDFs, we find that the cutoff plays a crucial role in determining the properties of metallic Al and semiconductor Si systems. We conclude that the KEDF with a sufficiently long cutoff performs even better than some representative non-local KEDFs in some aspects, which sheds light on optimizing the KEDFs in OFDFT to achieve better accuracy.
