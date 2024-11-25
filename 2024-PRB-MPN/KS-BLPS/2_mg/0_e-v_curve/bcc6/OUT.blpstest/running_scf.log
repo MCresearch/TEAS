@@ -1,0 +1,3562 @@
+                                                                                     
+                             WELCOME TO ABACUS v3.0                                  
+                                                                                     
+               'Atomic-orbital Based Ab-initio Computation at UStc'                  
+                                                                                     
+                     Website: http://abacus.ustc.edu.cn/                             
+                                                                                     
+    Version: Parallel, in development
+    Processor Number is 1
+    Start Time is Wed Dec 28 12:38:34 2022
+                                                                                     
+ ------------------------------------------------------------------------------------
+
+ READING GENERAL INFORMATION
+                           global_out_dir = OUT.blpstest/
+                           global_in_card = INPUT
+                               pseudo_dir = 
+                              orbital_dir = 
+                                    DRANK = 1
+                                    DSIZE = 1
+                                   DCOLOR = 1
+                                    GRANK = 1
+                                    GSIZE = 1
+ The esolver type has been set to : ksdft_pw
+
+
+
+
+ >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+ |                                                                    |
+ | Reading atom information in unitcell:                              |
+ | From the input file and the structure file we know the number of   |
+ | different elments in this unitcell, then we list the detail        |
+ | information for each element, especially the zeta and polar atomic |
+ | orbital number for each element. The total atom number is counted. |
+ | We calculate the nearest atom distance for each atom and show the  |
+ | Cartesian and Direct coordinates for each atom. We list the file   |
+ | address for atomic orbitals. The volume and the lattice vectors    |
+ | in real and reciprocal space is also shown.                        |
+ |                                                                    |
+ <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+
+
+
+ READING UNITCELL INFORMATION
+                                    ntype = 1
+                 atom label for species 1 = Mg
+                  lattice constant (Bohr) = 6.76126
+              lattice constant (Angstrom) = 3.5779
+
+ READING ATOM TYPE 1
+                               atom label = Mg
+                      L=0, number of zeta = 1
+                      L=1, number of zeta = 1
+                      L=2, number of zeta = 1
+             number of atom for this type = 1
+                      start magnetization = FALSE
+
+                        TOTAL ATOM NUMBER = 1
+
+ DIRECT COORDINATES
+         atom                   x                   y                   z                 mag                  vx                  vy                  vz
+     taud_Mg1                   0                   0                   0                   0                   0                   0                   0
+
+
+                          Volume (Bohr^3) = 154.544
+                             Volume (A^3) = 22.9011
+
+ Lattice vectors: (Cartesian coordinate: in unit of a_0)
+                 -0.5                +0.5                +0.5
+                 +0.5                -0.5                +0.5
+                 +0.5                +0.5                -0.5
+ Reciprocal vectors: (Cartesian coordinate: in unit of 2 pi/a_0)
+                   +0                  +1                  +1
+                   +1                  +0                  +1
+                   +1                  +1                  +0
+
+
+
+
+ >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+ |                                                                    |
+ | Reading pseudopotentials files:                                    |
+ | The pseudopotential file is in UPF format. The 'NC' indicates that |
+ | the type of pseudopotential is 'norm conserving'. Functional of    |
+ | exchange and correlation is decided by 4 given parameters in UPF   |
+ | file.  We also read in the 'core correction' if there exists.      |
+ | Also we can read the valence electrons number and the maximal      |
+ | angular momentum used in this pseudopotential. We also read in the |
+ | trail wave function, trail atomic density and local-pseudopotential|
+ | on logrithmic grid. The non-local pseudopotential projector is also|
+ | read in if there is any.                                           |
+ |                                                                    |
+ <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+
+
+
+                PAO radial cut off (Bohr) = 16
+
+ Read in pseudopotential file is mg.gga.psp
+                     pseudopotential type = 
+          exchange-correlation functional = XC_GGA_X_PBE+XC_GGA_C_PBE
+                 nonlocal core correction = 0
+                        valence electrons = 2
+                                     lmax = 0
+                           number of zeta = 0
+                     number of projectors = 0
+Notice: symbol 'mg_locpsp' is not an element symbol!!!! set the covalent radius to be 0.
+     initial pseudo atomic orbital number = 0
+                                   NLOCAL = 9
+
+
+
+
+ >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+ |                                                                    |
+ | Setup plane waves of charge/potential:                             |
+ | Use the energy cutoff and the lattice vectors to generate the      |
+ | dimensions of FFT grid. The number of FFT grid on each processor   |
+ | is 'nrxx'. The number of plane wave basis in reciprocal space is   |
+ | different for charege/potential and wave functions. We also set    |
+ | the 'sticks' for the parallel of FFT. The number of plane waves    |
+ | is 'npw' in each processor.                                        |
+ <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+
+
+
+
+ SETUP THE PLANE WAVE BASIS
+ energy cutoff for charge/potential (unit:Ry) = 240
+          [fft grid for charge/potential] = 30, 30, 30
+                      [fft grid division] = 1, 1, 1
+      [big fft grid for charge/potential] = 30, 30, 30
+                                     nbxx = 27000
+                                     nrxx = 27000
+
+ SETUP PLANE WAVES FOR CHARGE/POTENTIAL
+                    number of plane waves = 9693
+                         number of sticks = 619
+
+ PARALLEL PW FOR CHARGE/POTENTIAL
+     PROC   COLUMNS(POT)             PW
+        1            619           9693
+ --------------- sum -------------------
+        1            619           9693
+                            number of |g| = 129
+                                  max |g| = 276
+                                  min |g| = 0
+
+ SETUP THE ELECTRONS NUMBER
+            electron number of element Mg = 2
+      total electron number of element Mg = 2
+            AUTOSET number of electrons:  = 2
+ DONE : SETUP UNITCELL Time : 0.13473 (SEC)
+
+
+
+
+
+ >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+ |                                                                    |
+ | Doing symmetry analysis:                                           |
+ | We calculate the norm of 3 vectors and the angles between them,    |
+ | the type of Bravais lattice is given. We can judge if the unticell |
+ | is a primitive cell. Finally we give the point group operation for |
+ | this unitcell. We we use the point group operations to do symmetry |
+ | analysis on given k-point mesh and the charge density.             |
+ |                                                                    |
+ <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+
+
+
+ LATTICE VECTORS: (CARTESIAN COORDINATE: IN UNIT OF A0)
+                 -0.5                +0.5                +0.5
+                 +0.5                -0.5                +0.5
+                 +0.5                +0.5                -0.5
+                       right hand lattice = 1
+                                   NORM_A = 0.866025
+                                   NORM_B = 0.866025
+                                   NORM_C = 0.866025
+                           ALPHA (DEGREE) = 109.471
+                           BETA  (DEGREE) = 109.471
+                           GAMMA (DEGREE) = 109.471
+                             BRAVAIS TYPE = 2
+                     BRAVAIS LATTICE NAME = 02. Cubic I (body-centered)
+                                    IBRAV = 2
+                                  BRAVAIS = BODY CENTERED CUBIC
+                       LATTICE CONSTANT A = 1
+                                    ibrav = 2
+                        ROTATION MATRICES = 48
+              PURE POINT GROUP OPERATIONS = 48
+                   SPACE GROUP OPERATIONS = 48
+                              POINT GROUP = O_h
+Warning : If the optimal symmetric configuration is not the input configuration, 
+you have to manually change configurations, ABACUS would only calculate the input structure.
+ DONE : SYMMETRY Time : 0.190651 (SEC)
+
+
+
+
+
+ >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+ |                                                                    |
+ | Setup K-points                                                     |
+ | We setup the k-points according to input parameters.               |
+ | The reduced k-points are set according to symmetry operations.     |
+ | We treat the spin as another set of k-points.                      |
+ |                                                                    |
+ <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+
+
+
+
+ SETUP K-POINTS
+                                    nspin = 1
+                   Input type of k points = Monkhorst-Pack(Gamma)
+                                   nkstot = 8000
+                               nkstot_ibz = 256
+      IBZ             DirectX             DirectY             DirectZ              Weight    ibz2bz
+        1                   0                   0                   0            0.000125         0
+        2                0.95                0.05                   0              0.0015         1
+        3                 0.9                 0.1                   0              0.0015         2
+        4                0.85                0.15                   0              0.0015         3
+        5                 0.8                 0.2                   0              0.0015         4
+        6                0.75                0.25                   0              0.0015         5
+        7                 0.7                 0.3                   0              0.0015         6
+        8                0.65                0.35                   0              0.0015         7
+        9                 0.6                 0.4                   0              0.0015         8
+       10                0.55                0.45                   0              0.0015         9
+       11                 0.5                 0.5                   0             0.00075        10
+       12                0.95                0.95                 0.1               0.003        21
+       13                0.95                 0.9                0.15               0.006        22
+       14                0.95                0.85                 0.2               0.006        23
+       15                0.95                 0.8                0.25               0.006        24
+       16                0.95                0.75                 0.3               0.006        25
+       17                0.95                 0.7                0.35               0.006        26
+       18                0.95                 0.4                0.65               0.006        27
+       19                0.95                 0.6                0.45               0.006        28
+       20                0.95                0.55                 0.5               0.006        29
+       21                 0.9                 0.9                 0.2               0.003        42
+       22                 0.9                0.85                0.25               0.006        43
+       23                 0.9                 0.8                 0.3               0.006        44
+       24                 0.9                0.75                0.35               0.006        45
+       25                 0.9                 0.7                 0.4               0.006        46
+       26                 0.9                0.45                0.65               0.006        47
+       27                 0.9                 0.6                 0.5               0.006        48
+       28                 0.9                0.55                0.55               0.003        49
+       29                0.85                0.85                 0.3               0.003        63
+       30                0.85                 0.8                0.35               0.006        64
+       31                0.85                0.75                 0.4               0.006        65
+       32                0.85                 0.7                0.45               0.006        66
+       33                0.85                0.65                 0.5               0.006        67
+       34                0.85                 0.6                0.55               0.006        68
+       35                 0.8                 0.8                 0.4               0.003        84
+       36                 0.8                0.75                0.45               0.006        85
+       37                 0.8                 0.7                 0.5               0.006        86
+       38                 0.8                0.65                0.55               0.006        87
+       39                 0.6                 0.6                 0.8               0.003        88
+       40                0.75                0.75                 0.5               0.003       105
+       41                0.75                 0.7                0.55               0.006       106
+       42                0.75                0.65                 0.6               0.006       107
+       43                 0.7                 0.7                 0.6               0.003       126
+       44                 0.7                0.65                0.65               0.003       127
+       45                0.95                0.95                0.95               0.001       421
+       46                0.95                0.95                 0.9               0.003       422
+       47                0.95                0.95                0.85               0.003       423
+       48                0.95                0.95                 0.8               0.003       424
+       49                0.95                0.95                0.75               0.003       425
+       50                0.95                0.95                 0.7               0.003       426
+       51                0.95                0.95                0.65               0.003       427
+       52                0.95                0.95                 0.6               0.003       428
+       53                0.95                0.95                0.55              0.0015       429
+       54                0.95                0.95                0.05             0.00075       439
+       55                0.95                 0.9                 0.9               0.003       442
+       56                0.95                0.85                 0.9               0.006       443
+       57                0.95                 0.9                 0.8               0.006       444
+       58                0.95                 0.9                0.75               0.006       445
+       59                 0.9                 0.7                0.95               0.006       446
+       60                 0.9                0.65                0.95               0.006       447
+       61                0.95                 0.9                 0.6               0.006       448
+       62                0.95                 0.1                 0.9               0.003       458
+       63                0.95                0.85                0.85               0.003       463
+       64                0.95                0.85                 0.8               0.006       464
+       65                0.95                0.85                0.75               0.006       465
+       66                0.95                0.85                 0.7               0.006       466
+       67                0.95                0.85                0.65               0.006       467
+       68                0.95                0.85                 0.6               0.003       468
+       69                0.95                0.85                0.15               0.003       477
+       70                 0.9                 0.9                0.15               0.003       478
+       71                0.95                 0.8                 0.8               0.003       484
+       72                0.95                 0.8                0.75               0.006       485
+       73                 0.8                 0.7                0.95               0.006       486
+       74                 0.8                0.65                0.95               0.006       487
+       75                0.95                 0.8                 0.2               0.003       496
+       76                 0.9                0.85                 0.2               0.006       497
+       77                0.95                0.75                0.75               0.003       505
+       78                0.75                 0.7                0.95               0.006       506
+       79                0.75                0.65                0.95               0.003       507
+       80                0.95                0.75                0.25               0.003       515
+       81                 0.9                 0.8                0.25               0.006       516
+       82                0.85                0.85                0.25               0.003       517
+       83                0.95                 0.7                 0.7               0.003       526
+       84                0.95                 0.7                 0.3               0.003       534
+       85                 0.9                0.75                 0.3               0.006       535
+       86                0.85                 0.8                 0.3               0.006       536
+       87                0.95                0.65                0.35               0.003       553
+       88                 0.9                 0.7                0.35               0.006       554
+       89                0.85                0.75                0.35               0.006       555
+       90                 0.8                 0.8                0.35               0.003       556
+       91                0.95                 0.6                 0.4               0.003       572
+       92                 0.9                0.65                 0.4               0.006       573
+       93                0.85                 0.7                 0.4               0.006       574
+       94                 0.8                0.75                 0.4               0.006       575
+       95                0.95                0.55                0.45               0.003       591
+       96                 0.9                 0.6                0.45               0.006       592
+       97                0.85                0.65                0.45               0.006       593
+       98                 0.8                 0.7                0.45               0.006       594
+       99                0.75                0.75                0.45               0.003       595
+      100                0.95                 0.5                 0.5              0.0015       610
+      101                 0.9                0.55                 0.5               0.006       611
+      102                0.85                 0.6                 0.5               0.006       612
+      103                 0.8                0.65                 0.5               0.006       613
+      104                0.75                 0.7                 0.5               0.006       614
+      105                0.55                0.55                0.85               0.003       631
+      106                 0.8                0.55                 0.6               0.006       632
+      107                0.75                0.65                0.55               0.006       633
+      108                 0.7                 0.7                0.55               0.003       634
+      109                0.75                 0.6                 0.6               0.003       652
+      110                 0.7                0.65                 0.6               0.006       653
+      111                0.65                0.65                0.65               0.001       673
+      112                 0.9                 0.9                 0.9               0.001       842
+      113                 0.9                 0.9                0.85               0.003       843
+      114                 0.9                 0.9                 0.8               0.003       844
+      115                 0.9                 0.9                0.75               0.003       845
+      116                 0.9                 0.7                 0.9               0.003       846
+      117                 0.9                0.65                 0.9               0.003       847
+      118                 0.9                 0.9                 0.6              0.0015       848
+      119                 0.9                 0.9                 0.1             0.00075       858
+      120                 0.9                0.85                0.85               0.003       863
+      121                 0.9                0.85                 0.8               0.006       864
+      122                 0.9                0.85                0.75               0.006       865
+      123                 0.9                0.85                 0.7               0.006       866
+      124                 0.9                0.85                0.65               0.006       867
+      125                 0.9                0.85                0.15               0.003       877
+      126                 0.9                 0.8                 0.8               0.003       884
+      127                 0.9                 0.8                0.75               0.006       885
+      128                 0.9                 0.8                 0.7               0.006       886
+      129                 0.9                 0.8                0.65               0.003       887
+      130                 0.9                 0.8                 0.2               0.003       896
+      131                0.85                0.85                 0.2               0.003       897
+      132                 0.9                0.75                0.75               0.003       905
+      133                 0.9                0.75                 0.7               0.006       906
+      134                 0.9                0.75                0.25               0.003       915
+      135                0.85                 0.8                0.25               0.006       916
+      136                 0.9                 0.7                 0.7               0.001       926
+      137                 0.9                 0.7                 0.3               0.003       934
+      138                0.85                0.75                 0.3               0.006       935
+      139                 0.8                 0.8                 0.3               0.003       936
+      140                 0.9                0.65                0.35               0.003       953
+      141                0.85                 0.7                0.35               0.006       954
+      142                 0.8                0.75                0.35               0.006       955
+      143                 0.9                 0.6                 0.4               0.003       972
+      144                0.85                0.65                 0.4               0.006       973
+      145                 0.8                 0.7                 0.4               0.006       974
+      146                0.75                0.75                 0.4               0.003       975
+      147                 0.9                0.45                0.55               0.003       991
+      148                0.85                 0.6                0.45               0.006       992
+      149                 0.8                0.65                0.45               0.006       993
+      150                0.75                 0.7                0.45               0.006       994
+      151                 0.9                 0.5                 0.5              0.0015      1010
+      152                0.85                0.55                 0.5               0.006      1011
+      153                 0.8                 0.6                 0.5               0.006      1012
+      154                0.75                0.65                 0.5               0.006      1013
+      155                 0.7                 0.7                 0.5               0.003      1014
+      156                 0.8                0.55                0.55               0.003      1031
+      157                0.75                 0.6                0.55               0.006      1032
+      158                 0.7                0.65                0.55               0.006      1033
+      159                 0.7                 0.6                 0.6               0.003      1052
+      160                0.65                0.65                 0.6               0.003      1053
+      161                0.85                0.85                0.85               0.001      1263
+      162                0.85                0.85                 0.8               0.003      1264
+      163                0.85                0.85                0.75               0.003      1265
+      164                0.85                0.85                 0.7               0.003      1266
+      165                0.85                0.85                0.65              0.0015      1267
+      166                0.85                0.85                0.15             0.00075      1277
+      167                0.85                 0.8                 0.8               0.003      1284
+      168                0.85                 0.8                0.75               0.006      1285
+      169                0.85                 0.8                 0.7               0.006      1286
+      170                0.85                 0.8                 0.2               0.003      1296
+      171                0.85                0.75                0.75               0.003      1305
+      172                0.85                0.75                 0.7               0.003      1306
+      173                0.85                0.75                0.25               0.003      1315
+      174                 0.8                 0.8                0.25               0.003      1316
+      175                0.85                 0.7                 0.3               0.003      1334
+      176                 0.8                0.75                 0.3               0.006      1335
+      177                0.85                0.65                0.35               0.003      1353
+      178                 0.8                 0.7                0.35               0.006      1354
+      179                0.75                0.75                0.35               0.003      1355
+      180                0.85                 0.6                 0.4               0.003      1372
+      181                 0.8                0.65                 0.4               0.006      1373
+      182                0.75                 0.7                 0.4               0.006      1374
+      183                0.85                0.55                0.45               0.003      1391
+      184                 0.8                 0.6                0.45               0.006      1392
+      185                0.75                0.65                0.45               0.006      1393
+      186                 0.7                 0.7                0.45               0.003      1394
+      187                0.85                 0.5                 0.5              0.0015      1410
+      188                 0.8                0.55                 0.5               0.006      1411
+      189                0.75                 0.6                 0.5               0.006      1412
+      190                 0.7                0.65                 0.5               0.006      1413
+      191                0.75                0.55                0.55               0.003      1431
+      192                 0.6                0.55                 0.7               0.006      1432
+      193                0.65                0.65                0.55               0.003      1433
+      194                0.65                 0.6                 0.6               0.003      1452
+      195                 0.8                 0.8                 0.8               0.001      1684
+      196                 0.8                 0.8                0.75               0.003      1685
+      197                 0.8                 0.8                 0.7              0.0015      1686
+      198                 0.8                 0.8                 0.2             0.00075      1696
+      199                 0.8                0.75                0.75               0.003      1705
+      200                 0.8                0.75                0.25               0.003      1715
+      201                 0.8                 0.7                 0.3               0.003      1734
+      202                0.75                0.75                 0.3               0.003      1735
+      203                 0.8                0.65                0.35               0.003      1753
+      204                0.75                 0.7                0.35               0.006      1754
+      205                 0.8                 0.6                 0.4               0.003      1772
+      206                0.75                0.65                 0.4               0.006      1773
+      207                 0.7                 0.7                 0.4               0.003      1774
+      208                 0.8                0.45                0.55               0.003      1791
+      209                0.75                 0.6                0.45               0.006      1792
+      210                 0.7                0.65                0.45               0.006      1793
+      211                 0.8                 0.5                 0.5              0.0015      1810
+      212                0.75                0.55                 0.5               0.006      1811
+      213                 0.7                 0.5                 0.6               0.006      1812
+      214                0.65                0.65                 0.5               0.003      1813
+      215                 0.7                0.55                0.55               0.003      1831
+      216                 0.6                0.55                0.65               0.006      1832
+      217                 0.6                 0.6                 0.6               0.001      1852
+      218                0.75                0.75                0.75             0.00025      2105
+      219                0.75                0.75                0.25             0.00075      2115
+      220                0.75                 0.7                 0.3               0.003      2134
+      221                0.75                0.65                0.35               0.003      2153
+      222                 0.7                 0.7                0.35               0.003      2154
+      223                0.75                 0.6                 0.4               0.003      2172
+      224                 0.7                0.65                 0.4               0.006      2173
+      225                0.75                0.45                0.55               0.003      2191
+      226                 0.6                0.45                 0.7               0.006      2192
+      227                0.65                0.65                0.45               0.003      2193
+      228                0.75                 0.5                 0.5              0.0015      2210
+      229                 0.7                0.55                 0.5               0.006      2211
+      230                0.65                 0.5                 0.6               0.006      2212
+      231                0.65                0.55                0.55               0.003      2231
+      232                 0.6                 0.6                0.55               0.003      2232
+      233                 0.7                 0.7                 0.3             0.00075      2534
+      234                 0.7                0.65                0.35               0.003      2553
+      235                 0.6                 0.4                 0.7               0.003      2572
+      236                0.65                0.65                 0.4               0.003      2573
+      237                0.55                0.45                 0.7               0.003      2591
+      238                 0.6                0.45                0.65               0.006      2592
+      239                 0.7                 0.5                 0.5              0.0015      2610
+      240                0.65                0.55                 0.5               0.006      2611
+      241                 0.6                 0.6                 0.5               0.003      2612
+      242                 0.6                0.55                0.55               0.003      2631
+      243                0.65                0.65                0.35             0.00075      2953
+      244                 0.6                 0.4                0.65               0.003      2972
+      245                0.55                0.45                0.65               0.003      2991
+      246                 0.6                 0.6                0.45               0.003      2992
+      247                0.65                 0.5                 0.5              0.0015      3010
+      248                 0.6                0.55                 0.5               0.006      3011
+      249                0.55                0.55                0.55               0.001      3031
+      250                 0.6                 0.6                 0.4             0.00075      3372
+      251                 0.6                0.55                0.45               0.003      3391
+      252                 0.6                 0.5                 0.5              0.0015      3410
+      253                0.55                0.55                 0.5               0.003      3411
+      254                0.55                0.55                0.45             0.00075      3791
+      255                0.55                 0.5                 0.5              0.0015      3810
+      256                 0.5                 0.5                 0.5            0.000125      4210
+                               nkstot now = 256
+
+  KPOINTS            DIRECT_X            DIRECT_Y            DIRECT_Z              WEIGHT
+        1                   0                   0                   0            0.000125
+        2                0.95                0.05                   0              0.0015
+        3                 0.9                 0.1                   0              0.0015
+        4                0.85                0.15                   0              0.0015
+        5                 0.8                 0.2                   0              0.0015
+        6                0.75                0.25                   0              0.0015
+        7                 0.7                 0.3                   0              0.0015
+        8                0.65                0.35                   0              0.0015
+        9                 0.6                 0.4                   0              0.0015
+       10                0.55                0.45                   0              0.0015
+       11                 0.5                 0.5                   0             0.00075
+       12                0.95                0.95                 0.1               0.003
+       13                0.95                 0.9                0.15               0.006
+       14                0.95                0.85                 0.2               0.006
+       15                0.95                 0.8                0.25               0.006
+       16                0.95                0.75                 0.3               0.006
+       17                0.95                 0.7                0.35               0.006
+       18                0.95                 0.4                0.65               0.006
+       19                0.95                 0.6                0.45               0.006
+       20                0.95                0.55                 0.5               0.006
+       21                 0.9                 0.9                 0.2               0.003
+       22                 0.9                0.85                0.25               0.006
+       23                 0.9                 0.8                 0.3               0.006
+       24                 0.9                0.75                0.35               0.006
+       25                 0.9                 0.7                 0.4               0.006
+       26                 0.9                0.45                0.65               0.006
+       27                 0.9                 0.6                 0.5               0.006
+       28                 0.9                0.55                0.55               0.003
+       29                0.85                0.85                 0.3               0.003
+       30                0.85                 0.8                0.35               0.006
+       31                0.85                0.75                 0.4               0.006
+       32                0.85                 0.7                0.45               0.006
+       33                0.85                0.65                 0.5               0.006
+       34                0.85                 0.6                0.55               0.006
+       35                 0.8                 0.8                 0.4               0.003
+       36                 0.8                0.75                0.45               0.006
+       37                 0.8                 0.7                 0.5               0.006
+       38                 0.8                0.65                0.55               0.006
+       39                 0.6                 0.6                 0.8               0.003
+       40                0.75                0.75                 0.5               0.003
+       41                0.75                 0.7                0.55               0.006
+       42                0.75                0.65                 0.6               0.006
+       43                 0.7                 0.7                 0.6               0.003
+       44                 0.7                0.65                0.65               0.003
+       45                0.95                0.95                0.95               0.001
+       46                0.95                0.95                 0.9               0.003
+       47                0.95                0.95                0.85               0.003
+       48                0.95                0.95                 0.8               0.003
+       49                0.95                0.95                0.75               0.003
+       50                0.95                0.95                 0.7               0.003
+       51                0.95                0.95                0.65               0.003
+       52                0.95                0.95                 0.6               0.003
+       53                0.95                0.95                0.55              0.0015
+       54                0.95                0.95                0.05             0.00075
+       55                0.95                 0.9                 0.9               0.003
+       56                0.95                0.85                 0.9               0.006
+       57                0.95                 0.9                 0.8               0.006
+       58                0.95                 0.9                0.75               0.006
+       59                 0.9                 0.7                0.95               0.006
+       60                 0.9                0.65                0.95               0.006
+       61                0.95                 0.9                 0.6               0.006
+       62                0.95                 0.1                 0.9               0.003
+       63                0.95                0.85                0.85               0.003
+       64                0.95                0.85                 0.8               0.006
+       65                0.95                0.85                0.75               0.006
+       66                0.95                0.85                 0.7               0.006
+       67                0.95                0.85                0.65               0.006
+       68                0.95                0.85                 0.6               0.003
+       69                0.95                0.85                0.15               0.003
+       70                 0.9                 0.9                0.15               0.003
+       71                0.95                 0.8                 0.8               0.003
+       72                0.95                 0.8                0.75               0.006
+       73                 0.8                 0.7                0.95               0.006
+       74                 0.8                0.65                0.95               0.006
+       75                0.95                 0.8                 0.2               0.003
+       76                 0.9                0.85                 0.2               0.006
+       77                0.95                0.75                0.75               0.003
+       78                0.75                 0.7                0.95               0.006
+       79                0.75                0.65                0.95               0.003
+       80                0.95                0.75                0.25               0.003
+       81                 0.9                 0.8                0.25               0.006
+       82                0.85                0.85                0.25               0.003
+       83                0.95                 0.7                 0.7               0.003
+       84                0.95                 0.7                 0.3               0.003
+       85                 0.9                0.75                 0.3               0.006
+       86                0.85                 0.8                 0.3               0.006
+       87                0.95                0.65                0.35               0.003
+       88                 0.9                 0.7                0.35               0.006
+       89                0.85                0.75                0.35               0.006
+       90                 0.8                 0.8                0.35               0.003
+       91                0.95                 0.6                 0.4               0.003
+       92                 0.9                0.65                 0.4               0.006
+       93                0.85                 0.7                 0.4               0.006
+       94                 0.8                0.75                 0.4               0.006
+       95                0.95                0.55                0.45               0.003
+       96                 0.9                 0.6                0.45               0.006
+       97                0.85                0.65                0.45               0.006
+       98                 0.8                 0.7                0.45               0.006
+       99                0.75                0.75                0.45               0.003
+      100                0.95                 0.5                 0.5              0.0015
+      101                 0.9                0.55                 0.5               0.006
+      102                0.85                 0.6                 0.5               0.006
+      103                 0.8                0.65                 0.5               0.006
+      104                0.75                 0.7                 0.5               0.006
+      105                0.55                0.55                0.85               0.003
+      106                 0.8                0.55                 0.6               0.006
+      107                0.75                0.65                0.55               0.006
+      108                 0.7                 0.7                0.55               0.003
+      109                0.75                 0.6                 0.6               0.003
+      110                 0.7                0.65                 0.6               0.006
+      111                0.65                0.65                0.65               0.001
+      112                 0.9                 0.9                 0.9               0.001
+      113                 0.9                 0.9                0.85               0.003
+      114                 0.9                 0.9                 0.8               0.003
+      115                 0.9                 0.9                0.75               0.003
+      116                 0.9                 0.7                 0.9               0.003
+      117                 0.9                0.65                 0.9               0.003
+      118                 0.9                 0.9                 0.6              0.0015
+      119                 0.9                 0.9                 0.1             0.00075
+      120                 0.9                0.85                0.85               0.003
+      121                 0.9                0.85                 0.8               0.006
+      122                 0.9                0.85                0.75               0.006
+      123                 0.9                0.85                 0.7               0.006
+      124                 0.9                0.85                0.65               0.006
+      125                 0.9                0.85                0.15               0.003
+      126                 0.9                 0.8                 0.8               0.003
+      127                 0.9                 0.8                0.75               0.006
+      128                 0.9                 0.8                 0.7               0.006
+      129                 0.9                 0.8                0.65               0.003
+      130                 0.9                 0.8                 0.2               0.003
+      131                0.85                0.85                 0.2               0.003
+      132                 0.9                0.75                0.75               0.003
+      133                 0.9                0.75                 0.7               0.006
+      134                 0.9                0.75                0.25               0.003
+      135                0.85                 0.8                0.25               0.006
+      136                 0.9                 0.7                 0.7               0.001
+      137                 0.9                 0.7                 0.3               0.003
+      138                0.85                0.75                 0.3               0.006
+      139                 0.8                 0.8                 0.3               0.003
+      140                 0.9                0.65                0.35               0.003
+      141                0.85                 0.7                0.35               0.006
+      142                 0.8                0.75                0.35               0.006
+      143                 0.9                 0.6                 0.4               0.003
+      144                0.85                0.65                 0.4               0.006
+      145                 0.8                 0.7                 0.4               0.006
+      146                0.75                0.75                 0.4               0.003
+      147                 0.9                0.45                0.55               0.003
+      148                0.85                 0.6                0.45               0.006
+      149                 0.8                0.65                0.45               0.006
+      150                0.75                 0.7                0.45               0.006
+      151                 0.9                 0.5                 0.5              0.0015
+      152                0.85                0.55                 0.5               0.006
+      153                 0.8                 0.6                 0.5               0.006
+      154                0.75                0.65                 0.5               0.006
+      155                 0.7                 0.7                 0.5               0.003
+      156                 0.8                0.55                0.55               0.003
+      157                0.75                 0.6                0.55               0.006
+      158                 0.7                0.65                0.55               0.006
+      159                 0.7                 0.6                 0.6               0.003
+      160                0.65                0.65                 0.6               0.003
+      161                0.85                0.85                0.85               0.001
+      162                0.85                0.85                 0.8               0.003
+      163                0.85                0.85                0.75               0.003
+      164                0.85                0.85                 0.7               0.003
+      165                0.85                0.85                0.65              0.0015
+      166                0.85                0.85                0.15             0.00075
+      167                0.85                 0.8                 0.8               0.003
+      168                0.85                 0.8                0.75               0.006
+      169                0.85                 0.8                 0.7               0.006
+      170                0.85                 0.8                 0.2               0.003
+      171                0.85                0.75                0.75               0.003
+      172                0.85                0.75                 0.7               0.003
+      173                0.85                0.75                0.25               0.003
+      174                 0.8                 0.8                0.25               0.003
+      175                0.85                 0.7                 0.3               0.003
+      176                 0.8                0.75                 0.3               0.006
+      177                0.85                0.65                0.35               0.003
+      178                 0.8                 0.7                0.35               0.006
+      179                0.75                0.75                0.35               0.003
+      180                0.85                 0.6                 0.4               0.003
+      181                 0.8                0.65                 0.4               0.006
+      182                0.75                 0.7                 0.4               0.006
+      183                0.85                0.55                0.45               0.003
+      184                 0.8                 0.6                0.45               0.006
+      185                0.75                0.65                0.45               0.006
+      186                 0.7                 0.7                0.45               0.003
+      187                0.85                 0.5                 0.5              0.0015
+      188                 0.8                0.55                 0.5               0.006
+      189                0.75                 0.6                 0.5               0.006
+      190                 0.7                0.65                 0.5               0.006
+      191                0.75                0.55                0.55               0.003
+      192                 0.6                0.55                 0.7               0.006
+      193                0.65                0.65                0.55               0.003
+      194                0.65                 0.6                 0.6               0.003
+      195                 0.8                 0.8                 0.8               0.001
+      196                 0.8                 0.8                0.75               0.003
+      197                 0.8                 0.8                 0.7              0.0015
+      198                 0.8                 0.8                 0.2             0.00075
+      199                 0.8                0.75                0.75               0.003
+      200                 0.8                0.75                0.25               0.003
+      201                 0.8                 0.7                 0.3               0.003
+      202                0.75                0.75                 0.3               0.003
+      203                 0.8                0.65                0.35               0.003
+      204                0.75                 0.7                0.35               0.006
+      205                 0.8                 0.6                 0.4               0.003
+      206                0.75                0.65                 0.4               0.006
+      207                 0.7                 0.7                 0.4               0.003
+      208                 0.8                0.45                0.55               0.003
+      209                0.75                 0.6                0.45               0.006
+      210                 0.7                0.65                0.45               0.006
+      211                 0.8                 0.5                 0.5              0.0015
+      212                0.75                0.55                 0.5               0.006
+      213                 0.7                 0.5                 0.6               0.006
+      214                0.65                0.65                 0.5               0.003
+      215                 0.7                0.55                0.55               0.003
+      216                 0.6                0.55                0.65               0.006
+      217                 0.6                 0.6                 0.6               0.001
+      218                0.75                0.75                0.75             0.00025
+      219                0.75                0.75                0.25             0.00075
+      220                0.75                 0.7                 0.3               0.003
+      221                0.75                0.65                0.35               0.003
+      222                 0.7                 0.7                0.35               0.003
+      223                0.75                 0.6                 0.4               0.003
+      224                 0.7                0.65                 0.4               0.006
+      225                0.75                0.45                0.55               0.003
+      226                 0.6                0.45                 0.7               0.006
+      227                0.65                0.65                0.45               0.003
+      228                0.75                 0.5                 0.5              0.0015
+      229                 0.7                0.55                 0.5               0.006
+      230                0.65                 0.5                 0.6               0.006
+      231                0.65                0.55                0.55               0.003
+      232                 0.6                 0.6                0.55               0.003
+      233                 0.7                 0.7                 0.3             0.00075
+      234                 0.7                0.65                0.35               0.003
+      235                 0.6                 0.4                 0.7               0.003
+      236                0.65                0.65                 0.4               0.003
+      237                0.55                0.45                 0.7               0.003
+      238                 0.6                0.45                0.65               0.006
+      239                 0.7                 0.5                 0.5              0.0015
+      240                0.65                0.55                 0.5               0.006
+      241                 0.6                 0.6                 0.5               0.003
+      242                 0.6                0.55                0.55               0.003
+      243                0.65                0.65                0.35             0.00075
+      244                 0.6                 0.4                0.65               0.003
+      245                0.55                0.45                0.65               0.003
+      246                 0.6                 0.6                0.45               0.003
+      247                0.65                 0.5                 0.5              0.0015
+      248                 0.6                0.55                 0.5               0.006
+      249                0.55                0.55                0.55               0.001
+      250                 0.6                 0.6                 0.4             0.00075
+      251                 0.6                0.55                0.45               0.003
+      252                 0.6                 0.5                 0.5              0.0015
+      253                0.55                0.55                 0.5               0.003
+      254                0.55                0.55                0.45             0.00075
+      255                0.55                 0.5                 0.5              0.0015
+      256                 0.5                 0.5                 0.5            0.000125
+
+           k-point number in this process = 256
+       minimum distributed K point number = 256
+
+  KPOINTS         CARTESIAN_X         CARTESIAN_Y         CARTESIAN_Z              WEIGHT
+        1                   0                   0                   0             0.00025
+        2                0.05                0.95                   1               0.003
+        3                 0.1                 0.9                   1               0.003
+        4                0.15                0.85                   1               0.003
+        5                 0.2                 0.8                   1               0.003
+        6                0.25                0.75                   1               0.003
+        7                 0.3                 0.7                   1               0.003
+        8                0.35                0.65                   1               0.003
+        9                 0.4                 0.6                   1               0.003
+       10                0.45                0.55                   1               0.003
+       11                 0.5                 0.5                   1              0.0015
+       12                1.05                1.05                 1.9               0.006
+       13                1.05                 1.1                1.85               0.012
+       14                1.05                1.15                 1.8               0.012
+       15                1.05                 1.2                1.75               0.012
+       16                1.05                1.25                 1.7               0.012
+       17                1.05                 1.3                1.65               0.012
+       18                1.05                 1.6                1.35               0.012
+       19                1.05                 1.4                1.55               0.012
+       20                1.05                1.45                 1.5               0.012
+       21                 1.1                 1.1                 1.8               0.006
+       22                 1.1                1.15                1.75               0.012
+       23                 1.1                 1.2                 1.7               0.012
+       24                 1.1                1.25                1.65               0.012
+       25                 1.1                 1.3                 1.6               0.012
+       26                 1.1                1.55                1.35               0.012
+       27                 1.1                 1.4                 1.5               0.012
+       28                 1.1                1.45                1.45               0.006
+       29                1.15                1.15                 1.7               0.006
+       30                1.15                 1.2                1.65               0.012
+       31                1.15                1.25                 1.6               0.012
+       32                1.15                 1.3                1.55               0.012
+       33                1.15                1.35                 1.5               0.012
+       34                1.15                 1.4                1.45               0.012
+       35                 1.2                 1.2                 1.6               0.006
+       36                 1.2                1.25                1.55               0.012
+       37                 1.2                 1.3                 1.5               0.012
+       38                 1.2                1.35                1.45               0.012
+       39                 1.4                 1.4                 1.2               0.006
+       40                1.25                1.25                 1.5               0.006
+       41                1.25                 1.3                1.45               0.012
+       42                1.25                1.35                 1.4               0.012
+       43                 1.3                 1.3                 1.4               0.006
+       44                 1.3                1.35                1.35               0.006
+       45                 1.9                 1.9                 1.9               0.002
+       46                1.85                1.85                 1.9               0.006
+       47                 1.8                 1.8                 1.9               0.006
+       48                1.75                1.75                 1.9               0.006
+       49                 1.7                 1.7                 1.9               0.006
+       50                1.65                1.65                 1.9               0.006
+       51                 1.6                 1.6                 1.9               0.006
+       52                1.55                1.55                 1.9               0.006
+       53                 1.5                 1.5                 1.9               0.003
+       54                   1                   1                 1.9              0.0015
+       55                 1.8                1.85                1.85               0.006
+       56                1.75                1.85                 1.8               0.012
+       57                 1.7                1.75                1.85               0.012
+       58                1.65                 1.7                1.85               0.012
+       59                1.65                1.85                 1.6               0.012
+       60                 1.6                1.85                1.55               0.012
+       61                 1.5                1.55                1.85               0.012
+       62                   1                1.85                1.05               0.006
+       63                 1.7                 1.8                 1.8               0.006
+       64                1.65                1.75                 1.8               0.012
+       65                 1.6                 1.7                 1.8               0.012
+       66                1.55                1.65                 1.8               0.012
+       67                 1.5                 1.6                 1.8               0.012
+       68                1.45                1.55                 1.8               0.006
+       69                   1                 1.1                 1.8               0.006
+       70                1.05                1.05                 1.8               0.006
+       71                 1.6                1.75                1.75               0.006
+       72                1.55                 1.7                1.75               0.012
+       73                1.65                1.75                 1.5               0.012
+       74                 1.6                1.75                1.45               0.012
+       75                   1                1.15                1.75               0.006
+       76                1.05                 1.1                1.75               0.012
+       77                 1.5                 1.7                 1.7               0.006
+       78                1.65                 1.7                1.45               0.012
+       79                 1.6                 1.7                 1.4               0.006
+       80                   1                 1.2                 1.7               0.006
+       81                1.05                1.15                 1.7               0.012
+       82                 1.1                 1.1                 1.7               0.006
+       83                 1.4                1.65                1.65               0.006
+       84                   1                1.25                1.65               0.006
+       85                1.05                 1.2                1.65               0.012
+       86                 1.1                1.15                1.65               0.012
+       87                   1                 1.3                 1.6               0.006
+       88                1.05                1.25                 1.6               0.012
+       89                 1.1                 1.2                 1.6               0.012
+       90                1.15                1.15                 1.6               0.006
+       91                   1                1.35                1.55               0.006
+       92                1.05                 1.3                1.55               0.012
+       93                 1.1                1.25                1.55               0.012
+       94                1.15                 1.2                1.55               0.012
+       95                   1                 1.4                 1.5               0.006
+       96                1.05                1.35                 1.5               0.012
+       97                 1.1                 1.3                 1.5               0.012
+       98                1.15                1.25                 1.5               0.012
+       99                 1.2                 1.2                 1.5               0.006
+      100                   1                1.45                1.45               0.003
+      101                1.05                 1.4                1.45               0.012
+      102                 1.1                1.35                1.45               0.012
+      103                1.15                 1.3                1.45               0.012
+      104                 1.2                1.25                1.45               0.012
+      105                 1.4                 1.4                 1.1               0.006
+      106                1.15                 1.4                1.35               0.012
+      107                 1.2                 1.3                 1.4               0.012
+      108                1.25                1.25                 1.4               0.006
+      109                 1.2                1.35                1.35               0.006
+      110                1.25                 1.3                1.35               0.012
+      111                 1.3                 1.3                 1.3               0.002
+      112                 1.8                 1.8                 1.8               0.002
+      113                1.75                1.75                 1.8               0.006
+      114                 1.7                 1.7                 1.8               0.006
+      115                1.65                1.65                 1.8               0.006
+      116                 1.6                 1.8                 1.6               0.006
+      117                1.55                 1.8                1.55               0.006
+      118                 1.5                 1.5                 1.8               0.003
+      119                   1                   1                 1.8              0.0015
+      120                 1.7                1.75                1.75               0.006
+      121                1.65                 1.7                1.75               0.012
+      122                 1.6                1.65                1.75               0.012
+      123                1.55                 1.6                1.75               0.012
+      124                 1.5                1.55                1.75               0.012
+      125                   1                1.05                1.75               0.006
+      126                 1.6                 1.7                 1.7               0.006
+      127                1.55                1.65                 1.7               0.012
+      128                 1.5                 1.6                 1.7               0.012
+      129                1.45                1.55                 1.7               0.006
+      130                   1                 1.1                 1.7               0.006
+      131                1.05                1.05                 1.7               0.006
+      132                 1.5                1.65                1.65               0.006
+      133                1.45                 1.6                1.65               0.012
+      134                   1                1.15                1.65               0.006
+      135                1.05                 1.1                1.65               0.012
+      136                 1.4                 1.6                 1.6               0.002
+      137                   1                 1.2                 1.6               0.006
+      138                1.05                1.15                 1.6               0.012
+      139                 1.1                 1.1                 1.6               0.006
+      140                   1                1.25                1.55               0.006
+      141                1.05                 1.2                1.55               0.012
+      142                 1.1                1.15                1.55               0.012
+      143                   1                 1.3                 1.5               0.006
+      144                1.05                1.25                 1.5               0.012
+      145                 1.1                 1.2                 1.5               0.012
+      146                1.15                1.15                 1.5               0.006
+      147                   1                1.45                1.35               0.006
+      148                1.05                 1.3                1.45               0.012
+      149                 1.1                1.25                1.45               0.012
+      150                1.15                 1.2                1.45               0.012
+      151                   1                 1.4                 1.4               0.003
+      152                1.05                1.35                 1.4               0.012
+      153                 1.1                 1.3                 1.4               0.012
+      154                1.15                1.25                 1.4               0.012
+      155                 1.2                 1.2                 1.4               0.006
+      156                 1.1                1.35                1.35               0.006
+      157                1.15                 1.3                1.35               0.012
+      158                 1.2                1.25                1.35               0.012
+      159                 1.2                 1.3                 1.3               0.006
+      160                1.25                1.25                 1.3               0.006
+      161                 1.7                 1.7                 1.7               0.002
+      162                1.65                1.65                 1.7               0.006
+      163                 1.6                 1.6                 1.7               0.006
+      164                1.55                1.55                 1.7               0.006
+      165                 1.5                 1.5                 1.7               0.003
+      166                   1                   1                 1.7              0.0015
+      167                 1.6                1.65                1.65               0.006
+      168                1.55                 1.6                1.65               0.012
+      169                 1.5                1.55                1.65               0.012
+      170                   1                1.05                1.65               0.006
+      171                 1.5                 1.6                 1.6               0.006
+      172                1.45                1.55                 1.6               0.006
+      173                   1                 1.1                 1.6               0.006
+      174                1.05                1.05                 1.6               0.006
+      175                   1                1.15                1.55               0.006
+      176                1.05                 1.1                1.55               0.012
+      177                   1                 1.2                 1.5               0.006
+      178                1.05                1.15                 1.5               0.012
+      179                 1.1                 1.1                 1.5               0.006
+      180                   1                1.25                1.45               0.006
+      181                1.05                 1.2                1.45               0.012
+      182                 1.1                1.15                1.45               0.012
+      183                   1                 1.3                 1.4               0.006
+      184                1.05                1.25                 1.4               0.012
+      185                 1.1                 1.2                 1.4               0.012
+      186                1.15                1.15                 1.4               0.006
+      187                   1                1.35                1.35               0.003
+      188                1.05                 1.3                1.35               0.012
+      189                 1.1                1.25                1.35               0.012
+      190                1.15                 1.2                1.35               0.012
+      191                 1.1                 1.3                 1.3               0.006
+      192                1.25                 1.3                1.15               0.012
+      193                 1.2                 1.2                 1.3               0.006
+      194                 1.2                1.25                1.25               0.006
+      195                 1.6                 1.6                 1.6               0.002
+      196                1.55                1.55                 1.6               0.006
+      197                 1.5                 1.5                 1.6               0.003
+      198                   1                   1                 1.6              0.0015
+      199                 1.5                1.55                1.55               0.006
+      200                   1                1.05                1.55               0.006
+      201                   1                 1.1                 1.5               0.006
+      202                1.05                1.05                 1.5               0.006
+      203                   1                1.15                1.45               0.006
+      204                1.05                 1.1                1.45               0.012
+      205                   1                 1.2                 1.4               0.006
+      206                1.05                1.15                 1.4               0.012
+      207                 1.1                 1.1                 1.4               0.006
+      208                   1                1.35                1.25               0.006
+      209                1.05                 1.2                1.35               0.012
+      210                 1.1                1.15                1.35               0.012
+      211                   1                 1.3                 1.3               0.003
+      212                1.05                1.25                 1.3               0.012
+      213                 1.1                 1.3                 1.2               0.012
+      214                1.15                1.15                 1.3               0.006
+      215                 1.1                1.25                1.25               0.006
+      216                 1.2                1.25                1.15               0.012
+      217                 1.2                 1.2                 1.2               0.002
+      218                 1.5                 1.5                 1.5              0.0005
+      219                   1                   1                 1.5              0.0015
+      220                   1                1.05                1.45               0.006
+      221                   1                 1.1                 1.4               0.006
+      222                1.05                1.05                 1.4               0.006
+      223                   1                1.15                1.35               0.006
+      224                1.05                 1.1                1.35               0.012
+      225                   1                 1.3                 1.2               0.006
+      226                1.15                 1.3                1.05               0.012
+      227                 1.1                 1.1                 1.3               0.006
+      228                   1                1.25                1.25               0.003
+      229                1.05                 1.2                1.25               0.012
+      230                 1.1                1.25                1.15               0.012
+      231                 1.1                 1.2                 1.2               0.006
+      232                1.15                1.15                 1.2               0.006
+      233                   1                   1                 1.4              0.0015
+      234                   1                1.05                1.35               0.006
+      235                 1.1                 1.3                   1               0.006
+      236                1.05                1.05                 1.3               0.006
+      237                1.15                1.25                   1               0.006
+      238                 1.1                1.25                1.05               0.012
+      239                   1                 1.2                 1.2               0.003
+      240                1.05                1.15                 1.2               0.012
+      241                 1.1                 1.1                 1.2               0.006
+      242                 1.1                1.15                1.15               0.006
+      243                   1                   1                 1.3              0.0015
+      244                1.05                1.25                   1               0.006
+      245                 1.1                 1.2                   1               0.006
+      246                1.05                1.05                 1.2               0.006
+      247                   1                1.15                1.15               0.003
+      248                1.05                 1.1                1.15               0.012
+      249                 1.1                 1.1                 1.1               0.002
+      250                   1                   1                 1.2              0.0015
+      251                   1                1.05                1.15               0.006
+      252                   1                 1.1                 1.1               0.003
+      253                1.05                1.05                 1.1               0.006
+      254                   1                   1                 1.1              0.0015
+      255                   1                1.05                1.05               0.003
+      256                   1                   1                   1             0.00025
+
+  KPOINTS            DIRECT_X            DIRECT_Y            DIRECT_Z              WEIGHT
+        1                   0                   0                   0             0.00025
+        2                0.95                0.05                   0               0.003
+        3                 0.9                 0.1                   0               0.003
+        4                0.85                0.15                   0               0.003
+        5                 0.8                 0.2                   0               0.003
+        6                0.75                0.25                   0               0.003
+        7                 0.7                 0.3                   0               0.003
+        8                0.65                0.35                   0               0.003
+        9                 0.6                 0.4                   0               0.003
+       10                0.55                0.45                   0               0.003
+       11                 0.5                 0.5                   0              0.0015
+       12                0.95                0.95                 0.1               0.006
+       13                0.95                 0.9                0.15               0.012
+       14                0.95                0.85                 0.2               0.012
+       15                0.95                 0.8                0.25               0.012
+       16                0.95                0.75                 0.3               0.012
+       17                0.95                 0.7                0.35               0.012
+       18                0.95                 0.4                0.65               0.012
+       19                0.95                 0.6                0.45               0.012
+       20                0.95                0.55                 0.5               0.012
+       21                 0.9                 0.9                 0.2               0.006
+       22                 0.9                0.85                0.25               0.012
+       23                 0.9                 0.8                 0.3               0.012
+       24                 0.9                0.75                0.35               0.012
+       25                 0.9                 0.7                 0.4               0.012
+       26                 0.9                0.45                0.65               0.012
+       27                 0.9                 0.6                 0.5               0.012
+       28                 0.9                0.55                0.55               0.006
+       29                0.85                0.85                 0.3               0.006
+       30                0.85                 0.8                0.35               0.012
+       31                0.85                0.75                 0.4               0.012
+       32                0.85                 0.7                0.45               0.012
+       33                0.85                0.65                 0.5               0.012
+       34                0.85                 0.6                0.55               0.012
+       35                 0.8                 0.8                 0.4               0.006
+       36                 0.8                0.75                0.45               0.012
+       37                 0.8                 0.7                 0.5               0.012
+       38                 0.8                0.65                0.55               0.012
+       39                 0.6                 0.6                 0.8               0.006
+       40                0.75                0.75                 0.5               0.006
+       41                0.75                 0.7                0.55               0.012
+       42                0.75                0.65                 0.6               0.012
+       43                 0.7                 0.7                 0.6               0.006
+       44                 0.7                0.65                0.65               0.006
+       45                0.95                0.95                0.95               0.002
+       46                0.95                0.95                 0.9               0.006
+       47                0.95                0.95                0.85               0.006
+       48                0.95                0.95                 0.8               0.006
+       49                0.95                0.95                0.75               0.006
+       50                0.95                0.95                 0.7               0.006
+       51                0.95                0.95                0.65               0.006
+       52                0.95                0.95                 0.6               0.006
+       53                0.95                0.95                0.55               0.003
+       54                0.95                0.95                0.05              0.0015
+       55                0.95                 0.9                 0.9               0.006
+       56                0.95                0.85                 0.9               0.012
+       57                0.95                 0.9                 0.8               0.012
+       58                0.95                 0.9                0.75               0.012
+       59                 0.9                 0.7                0.95               0.012
+       60                 0.9                0.65                0.95               0.012
+       61                0.95                 0.9                 0.6               0.012
+       62                0.95                 0.1                 0.9               0.006
+       63                0.95                0.85                0.85               0.006
+       64                0.95                0.85                 0.8               0.012
+       65                0.95                0.85                0.75               0.012
+       66                0.95                0.85                 0.7               0.012
+       67                0.95                0.85                0.65               0.012
+       68                0.95                0.85                 0.6               0.006
+       69                0.95                0.85                0.15               0.006
+       70                 0.9                 0.9                0.15               0.006
+       71                0.95                 0.8                 0.8               0.006
+       72                0.95                 0.8                0.75               0.012
+       73                 0.8                 0.7                0.95               0.012
+       74                 0.8                0.65                0.95               0.012
+       75                0.95                 0.8                 0.2               0.006
+       76                 0.9                0.85                 0.2               0.012
+       77                0.95                0.75                0.75               0.006
+       78                0.75                 0.7                0.95               0.012
+       79                0.75                0.65                0.95               0.006
+       80                0.95                0.75                0.25               0.006
+       81                 0.9                 0.8                0.25               0.012
+       82                0.85                0.85                0.25               0.006
+       83                0.95                 0.7                 0.7               0.006
+       84                0.95                 0.7                 0.3               0.006
+       85                 0.9                0.75                 0.3               0.012
+       86                0.85                 0.8                 0.3               0.012
+       87                0.95                0.65                0.35               0.006
+       88                 0.9                 0.7                0.35               0.012
+       89                0.85                0.75                0.35               0.012
+       90                 0.8                 0.8                0.35               0.006
+       91                0.95                 0.6                 0.4               0.006
+       92                 0.9                0.65                 0.4               0.012
+       93                0.85                 0.7                 0.4               0.012
+       94                 0.8                0.75                 0.4               0.012
+       95                0.95                0.55                0.45               0.006
+       96                 0.9                 0.6                0.45               0.012
+       97                0.85                0.65                0.45               0.012
+       98                 0.8                 0.7                0.45               0.012
+       99                0.75                0.75                0.45               0.006
+      100                0.95                 0.5                 0.5               0.003
+      101                 0.9                0.55                 0.5               0.012
+      102                0.85                 0.6                 0.5               0.012
+      103                 0.8                0.65                 0.5               0.012
+      104                0.75                 0.7                 0.5               0.012
+      105                0.55                0.55                0.85               0.006
+      106                 0.8                0.55                 0.6               0.012
+      107                0.75                0.65                0.55               0.012
+      108                 0.7                 0.7                0.55               0.006
+      109                0.75                 0.6                 0.6               0.006
+      110                 0.7                0.65                 0.6               0.012
+      111                0.65                0.65                0.65               0.002
+      112                 0.9                 0.9                 0.9               0.002
+      113                 0.9                 0.9                0.85               0.006
+      114                 0.9                 0.9                 0.8               0.006
+      115                 0.9                 0.9                0.75               0.006
+      116                 0.9                 0.7                 0.9               0.006
+      117                 0.9                0.65                 0.9               0.006
+      118                 0.9                 0.9                 0.6               0.003
+      119                 0.9                 0.9                 0.1              0.0015
+      120                 0.9                0.85                0.85               0.006
+      121                 0.9                0.85                 0.8               0.012
+      122                 0.9                0.85                0.75               0.012
+      123                 0.9                0.85                 0.7               0.012
+      124                 0.9                0.85                0.65               0.012
+      125                 0.9                0.85                0.15               0.006
+      126                 0.9                 0.8                 0.8               0.006
+      127                 0.9                 0.8                0.75               0.012
+      128                 0.9                 0.8                 0.7               0.012
+      129                 0.9                 0.8                0.65               0.006
+      130                 0.9                 0.8                 0.2               0.006
+      131                0.85                0.85                 0.2               0.006
+      132                 0.9                0.75                0.75               0.006
+      133                 0.9                0.75                 0.7               0.012
+      134                 0.9                0.75                0.25               0.006
+      135                0.85                 0.8                0.25               0.012
+      136                 0.9                 0.7                 0.7               0.002
+      137                 0.9                 0.7                 0.3               0.006
+      138                0.85                0.75                 0.3               0.012
+      139                 0.8                 0.8                 0.3               0.006
+      140                 0.9                0.65                0.35               0.006
+      141                0.85                 0.7                0.35               0.012
+      142                 0.8                0.75                0.35               0.012
+      143                 0.9                 0.6                 0.4               0.006
+      144                0.85                0.65                 0.4               0.012
+      145                 0.8                 0.7                 0.4               0.012
+      146                0.75                0.75                 0.4               0.006
+      147                 0.9                0.45                0.55               0.006
+      148                0.85                 0.6                0.45               0.012
+      149                 0.8                0.65                0.45               0.012
+      150                0.75                 0.7                0.45               0.012
+      151                 0.9                 0.5                 0.5               0.003
+      152                0.85                0.55                 0.5               0.012
+      153                 0.8                 0.6                 0.5               0.012
+      154                0.75                0.65                 0.5               0.012
+      155                 0.7                 0.7                 0.5               0.006
+      156                 0.8                0.55                0.55               0.006
+      157                0.75                 0.6                0.55               0.012
+      158                 0.7                0.65                0.55               0.012
+      159                 0.7                 0.6                 0.6               0.006
+      160                0.65                0.65                 0.6               0.006
+      161                0.85                0.85                0.85               0.002
+      162                0.85                0.85                 0.8               0.006
+      163                0.85                0.85                0.75               0.006
+      164                0.85                0.85                 0.7               0.006
+      165                0.85                0.85                0.65               0.003
+      166                0.85                0.85                0.15              0.0015
+      167                0.85                 0.8                 0.8               0.006
+      168                0.85                 0.8                0.75               0.012
+      169                0.85                 0.8                 0.7               0.012
+      170                0.85                 0.8                 0.2               0.006
+      171                0.85                0.75                0.75               0.006
+      172                0.85                0.75                 0.7               0.006
+      173                0.85                0.75                0.25               0.006
+      174                 0.8                 0.8                0.25               0.006
+      175                0.85                 0.7                 0.3               0.006
+      176                 0.8                0.75                 0.3               0.012
+      177                0.85                0.65                0.35               0.006
+      178                 0.8                 0.7                0.35               0.012
+      179                0.75                0.75                0.35               0.006
+      180                0.85                 0.6                 0.4               0.006
+      181                 0.8                0.65                 0.4               0.012
+      182                0.75                 0.7                 0.4               0.012
+      183                0.85                0.55                0.45               0.006
+      184                 0.8                 0.6                0.45               0.012
+      185                0.75                0.65                0.45               0.012
+      186                 0.7                 0.7                0.45               0.006
+      187                0.85                 0.5                 0.5               0.003
+      188                 0.8                0.55                 0.5               0.012
+      189                0.75                 0.6                 0.5               0.012
+      190                 0.7                0.65                 0.5               0.012
+      191                0.75                0.55                0.55               0.006
+      192                 0.6                0.55                 0.7               0.012
+      193                0.65                0.65                0.55               0.006
+      194                0.65                 0.6                 0.6               0.006
+      195                 0.8                 0.8                 0.8               0.002
+      196                 0.8                 0.8                0.75               0.006
+      197                 0.8                 0.8                 0.7               0.003
+      198                 0.8                 0.8                 0.2              0.0015
+      199                 0.8                0.75                0.75               0.006
+      200                 0.8                0.75                0.25               0.006
+      201                 0.8                 0.7                 0.3               0.006
+      202                0.75                0.75                 0.3               0.006
+      203                 0.8                0.65                0.35               0.006
+      204                0.75                 0.7                0.35               0.012
+      205                 0.8                 0.6                 0.4               0.006
+      206                0.75                0.65                 0.4               0.012
+      207                 0.7                 0.7                 0.4               0.006
+      208                 0.8                0.45                0.55               0.006
+      209                0.75                 0.6                0.45               0.012
+      210                 0.7                0.65                0.45               0.012
+      211                 0.8                 0.5                 0.5               0.003
+      212                0.75                0.55                 0.5               0.012
+      213                 0.7                 0.5                 0.6               0.012
+      214                0.65                0.65                 0.5               0.006
+      215                 0.7                0.55                0.55               0.006
+      216                 0.6                0.55                0.65               0.012
+      217                 0.6                 0.6                 0.6               0.002
+      218                0.75                0.75                0.75              0.0005
+      219                0.75                0.75                0.25              0.0015
+      220                0.75                 0.7                 0.3               0.006
+      221                0.75                0.65                0.35               0.006
+      222                 0.7                 0.7                0.35               0.006
+      223                0.75                 0.6                 0.4               0.006
+      224                 0.7                0.65                 0.4               0.012
+      225                0.75                0.45                0.55               0.006
+      226                 0.6                0.45                 0.7               0.012
+      227                0.65                0.65                0.45               0.006
+      228                0.75                 0.5                 0.5               0.003
+      229                 0.7                0.55                 0.5               0.012
+      230                0.65                 0.5                 0.6               0.012
+      231                0.65                0.55                0.55               0.006
+      232                 0.6                 0.6                0.55               0.006
+      233                 0.7                 0.7                 0.3              0.0015
+      234                 0.7                0.65                0.35               0.006
+      235                 0.6                 0.4                 0.7               0.006
+      236                0.65                0.65                 0.4               0.006
+      237                0.55                0.45                 0.7               0.006
+      238                 0.6                0.45                0.65               0.012
+      239                 0.7                 0.5                 0.5               0.003
+      240                0.65                0.55                 0.5               0.012
+      241                 0.6                 0.6                 0.5               0.006
+      242                 0.6                0.55                0.55               0.006
+      243                0.65                0.65                0.35              0.0015
+      244                 0.6                 0.4                0.65               0.006
+      245                0.55                0.45                0.65               0.006
+      246                 0.6                 0.6                0.45               0.006
+      247                0.65                 0.5                 0.5               0.003
+      248                 0.6                0.55                 0.5               0.012
+      249                0.55                0.55                0.55               0.002
+      250                 0.6                 0.6                 0.4              0.0015
+      251                 0.6                0.55                0.45               0.006
+      252                 0.6                 0.5                 0.5               0.003
+      253                0.55                0.55                 0.5               0.006
+      254                0.55                0.55                0.45              0.0015
+      255                0.55                 0.5                 0.5               0.003
+      256                 0.5                 0.5                 0.5             0.00025
+ DONE : INIT K-POINTS Time : 0.538241 (SEC)
+
+
+
+
+
+ >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+ |                                                                    |
+ | Setup plane waves of wave functions:                               |
+ | Use the energy cutoff and the lattice vectors to generate the      |
+ | dimensions of FFT grid. The number of FFT grid on each processor   |
+ | is 'nrxx'. The number of plane wave basis in reciprocal space is   |
+ | different for charege/potential and wave functions. We also set    |
+ | the 'sticks' for the parallel of FFT. The number of plane wave of  |
+ | each k-point is 'npwk[ik]' in each processor                       |
+ <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+
+
+
+
+ SETUP PLANE WAVES FOR WAVE FUNCTIONS
+     energy cutoff for wavefunc (unit:Ry) = 60
+            [fft grid for wave functions] = 30, 30, 30
+                    number of plane waves = 3319
+                         number of sticks = 303
+
+ PARALLEL PW FOR WAVE FUNCTIONS
+     PROC   COLUMNS(POT)             PW
+        1            303           3319
+ --------------- sum -------------------
+        1            303           3319
+ DONE : INIT PLANEWAVE Time : 0.660751 (SEC)
+
+                           occupied bands = 1
+                                   NBANDS = 6
+                                     npwx = 1264
+
+ SETUP NONLOCAL PSEUDOPOTENTIALS IN PLANE WAVE BASIS
+ Mg non-local projectors:
+      TOTAL NUMBER OF NONLOCAL PROJECTORS = 0
+
+ nhm = 0, not allocate some matrix. DONE : LOCAL POTENTIAL Time : 0.675123 (SEC)
+
+
+ Init Non-Local PseudoPotential table : 
+ Init Non-Local-Pseudopotential done.
+ DONE : NON-LOCAL POTENTIAL Time : 0.675251 (SEC)
+
+
+ Make real space PAO into reciprocal space.
+       max mesh points in Pseudopotential = 1601
+     dq(describe PAO in reciprocal space) = 0.01
+                                    max q = 934
+
+ number of pseudo atomic orbitals for Mg is 0
+ DONE : INIT BASIS Time : 0.675418 (SEC)
+
+Successful completion of Potential's registration : local
+Successful completion of Potential's registration : hartree
+Successful completion of Potential's registration : xc
+                                 init_chg = atomic
+ DONE : INIT SCF Time : 0.744825 (SEC)
+
+
+ PW ALGORITHM --------------- ION=   1  ELEC=   1--------------------------------
+Average iterative diagonalization steps: 7.15625 ; where current threshold is: 0.01 . 
+
+ Density error is 0.046628831119
+                          Error Threshold = 0.01
+
+       Energy                       Rydberg                            eV
+   E_KohnSham                -1.76414293356                -24.0023959829
+     E_Harris                -1.71625784536                -23.3508859341
+      E_Fermi               +0.305942695271                +4.16256391716
+
+ PW ALGORITHM --------------- ION=   1  ELEC=   2--------------------------------
+Average iterative diagonalization steps: 2.21809895833 ; where current threshold is: 0.00233144155595 . 
+
+ Density error is 0.00434444301856
+                          Error Threshold = 0.00233144155595
+
+       Energy                       Rydberg                            eV
+   E_KohnSham                -1.77934648749                -24.2092509461
+     E_Harris                -1.76779392125                -24.0520702187
+      E_Fermi               +0.276252247605                +3.75860465273
+
+ PW ALGORITHM --------------- ION=   1  ELEC=   3--------------------------------
+Average iterative diagonalization steps: 2.99869791667 ; where current threshold is: 0.000217222150928 . 
+
+ Density error is 5.41453120626e-06
+                          Error Threshold = 0.000217222150928
+
+       Energy                       Rydberg                            eV
+   E_KohnSham                -1.77964190263                -24.2132702753
+     E_Harris                -1.77963759581                 -24.213211678
+      E_Fermi               +0.272509566819                +3.70768286825
+
+ PW ALGORITHM --------------- ION=   1  ELEC=   4--------------------------------
+Average iterative diagonalization steps: 5.22591145833 ; where current threshold is: 2.70726560313e-07 . 
+
+ Density error is 7.5905327499e-06
+                          Error Threshold = 2.70726560313e-07
+
+       Energy                       Rydberg                            eV
+   E_KohnSham                -1.77966568041                -24.2135937887
+     E_Harris                -1.77966521178                -24.2135874126
+      E_Fermi               +0.272477058351                +3.70724056785
+
+ PW ALGORITHM --------------- ION=   1  ELEC=   5--------------------------------
+Average iterative diagonalization steps: 2 ; where current threshold is: 2.70726560313e-07 . 
+
+ Density error is 1.835894761e-06
+                          Error Threshold = 2.70726560313e-07
+
+       Energy                       Rydberg                            eV
+   E_KohnSham                 -1.7796679668                -24.2136248966
+     E_Harris                -1.77966569794                -24.2135940271
+      E_Fermi               +0.272415752238                +3.70640645539
+
+ PW ALGORITHM --------------- ION=   1  ELEC=   6--------------------------------
+Average iterative diagonalization steps: 2.58203125 ; where current threshold is: 9.179473805e-08 . 
+
+ Density error is 3.72024468096e-06
+                          Error Threshold = 9.179473805e-08
+
+       Energy                       Rydberg                            eV
+   E_KohnSham                -1.77966848898                -24.2136320012
+     E_Harris                -1.77966815721                -24.2136274873
+      E_Fermi               +0.272305574327                  +3.704907408
+
+ PW ALGORITHM --------------- ION=   1  ELEC=   7--------------------------------
+Average iterative diagonalization steps: 2 ; where current threshold is: 9.179473805e-08 . 
+
+ Density error is 1.72162184442e-06
+                          Error Threshold = 9.179473805e-08
+
+       Energy                       Rydberg                            eV
+   E_KohnSham                -1.77966843662                -24.2136312888
+     E_Harris                 -1.7796684952                -24.2136320858
+      E_Fermi               +0.272328974315                +3.70522578118
+
+ PW ALGORITHM --------------- ION=   1  ELEC=   8--------------------------------
+Average iterative diagonalization steps: 2.00130208333 ; where current threshold is: 8.60810922209e-08 . 
+
+ Density error is 1.75805790317e-06
+                          Error Threshold = 8.60810922209e-08
+
+       Energy                       Rydberg                            eV
+   E_KohnSham                -1.77966871287                -24.2136350474
+     E_Harris                -1.77966850378                -24.2136322026
+      E_Fermi               +0.272435535637                +3.70667562235
+
+ PW ALGORITHM --------------- ION=   1  ELEC=   9--------------------------------
+Average iterative diagonalization steps: 2 ; where current threshold is: 8.60810922209e-08 . 
+
+ Density error is 2.8847300851e-07
+                          Error Threshold = 8.60810922209e-08
+
+       Energy                       Rydberg                            eV
+   E_KohnSham                -1.77966874527                -24.2136354882
+     E_Harris                -1.77966874479                -24.2136354817
+      E_Fermi               +0.272359916173                +3.70564676676
+
+ PW ALGORITHM --------------- ION=   1  ELEC=  10--------------------------------
+Average iterative diagonalization steps: 2.00911458333 ; where current threshold is: 1.44236504255e-08 . 
+
+ Density error is 2.8671902272e-07
+                          Error Threshold = 1.44236504255e-08
+
+       Energy                       Rydberg                            eV
+   E_KohnSham                -1.77966879136                -24.2136361153
+     E_Harris                -1.77966874592                -24.2136354971
+      E_Fermi               +0.272360007479                +3.70564800904
+
+ PW ALGORITHM --------------- ION=   1  ELEC=  11--------------------------------
+Average iterative diagonalization steps: 2 ; where current threshold is: 1.4335951136e-08 . 
+
+ Density error is 2.61073729857e-09
+                          Error Threshold = 1.4335951136e-08
+
+       Energy                       Rydberg                            eV
+   E_KohnSham                -1.77966879471                -24.2136361608
+     E_Harris                -1.77966879427                -24.2136361548
+      E_Fermi               +0.272383588157                +3.70596884062
+
+ PW ALGORITHM --------------- ION=   1  ELEC=  12--------------------------------
+Average iterative diagonalization steps: 2.79622395833 ; where current threshold is: 1.30536864928e-10 . 
+
+ Density error is 3.33656004956e-12
+                          Error Threshold = 1.30536864928e-10
+
+       Energy                       Rydberg                            eV
+   E_KohnSham                -1.77966879477                -24.2136361617
+     E_Harris                -1.77966879475                -24.2136361614
+       E_band               +0.119949316289                +1.63199417273
+   E_one_elec                +1.22735368953                 +16.699003639
+    E_Hartree             +0.00433566191551              +0.0589897066525
+         E_xc               -0.858224161728                -11.6767387608
+      E_Ewald                -2.15299113862                -29.2929472287
+      E_demet            -0.000142845873754             -0.00194351781884
+      E_descf                            +0                            +0
+        E_exx                            +0                            +0
+      E_Fermi               +0.272381498372                +3.70594040764
+
+ charge density convergence is achieved
+ final etot is -24.2136361617 eV
+
+ STATE ENERGY(eV) AND OCCUPATIONS    NSPIN == 1
+ 1/256 kpoint (Cartesian) = 0 0 0 (1205 pws)
+       1       -3.42346    0.000250000
+       2        18.7946        0.00000
+       3        18.7946        0.00000
+       4        18.7946        0.00000
+       5        19.4270        0.00000
+       6        19.4270        0.00000
+
+ 2/256 kpoint (Cartesian) = 0.0500000 0.950000 1.00000 (1217 pws)
+       1       -3.36530     0.00300000
+       2        17.2951        0.00000
+       3        17.9555        0.00000
+       4        18.1623        0.00000
+       5        18.7043        0.00000
+       6        19.1544        0.00000
+
+ 3/256 kpoint (Cartesian) = 0.100000 0.900000 1.00000 (1209 pws)
+       1       -3.19081     0.00300000
+       2        15.2781        0.00000
+       3        16.9798        0.00000
+       4        17.2437        0.00000
+       5        17.7414        0.00000
+       6        18.5606        0.00000
+
+ 4/256 kpoint (Cartesian) = 0.150000 0.850000 1.00000 (1216 pws)
+       1       -2.90009     0.00300000
+       2        13.3067        0.00000
+       3        16.1076        0.00000
+       4        16.3912        0.00000
+       5        16.8725        0.00000
+       6        17.9897        0.00000
+
+ 5/256 kpoint (Cartesian) = 0.200000 0.800000 1.00000 (1204 pws)
+       1       -2.49327     0.00300000
+       2        11.4260        0.00000
+       3        15.3490        0.00000
+       4        15.6419        0.00000
+       5        16.1153        0.00000
+       6        17.4497        0.00000
+
+ 6/256 kpoint (Cartesian) = 0.250000 0.750000 1.00000 (1216 pws)
+       1       -1.97062     0.00300000
+       2        9.64866        0.00000
+       3        14.7062        0.00000
+       4        15.0040        0.00000
+       5        15.4732        0.00000
+       6        16.9633        0.00000
+
+ 7/256 kpoint (Cartesian) = 0.300000 0.700000 1.00000 (1218 pws)
+       1       -1.33263     0.00300000
+       2        7.98028        0.00000
+       3        14.1798        0.00000
+       4        14.4805        0.00000
+       5        14.9472        0.00000
+       6        16.5480        0.00000
+
+ 8/256 kpoint (Cartesian) = 0.350000 0.650000 1.00000 (1214 pws)
+       1      -0.580364     0.00300000
+       2        6.42468        0.00000
+       3        13.7703        0.00000
+       4        14.0727        0.00000
+       5        14.5379        0.00000
+       6        16.2156        0.00000
+
+ 9/256 kpoint (Cartesian) = 0.400000 0.600000 1.00000 (1210 pws)
+       1       0.283237     0.00300000
+       2        4.98640        0.00000
+       3        13.4776        0.00000
+       4        13.7811        0.00000
+       5        14.2454        0.00000
+       6        15.9738        0.00000
+
+ 10/256 kpoint (Cartesian) = 0.450000 0.550000 1.00000 (1214 pws)
+       1        1.24461     0.00300000
+       2        3.67990     0.00192824
+       3        13.3020        0.00000
+       4        13.6060        0.00000
+       5        14.0698        0.00000
+       6        15.8270        0.00000
+
+ 11/256 kpoint (Cartesian) = 0.500000 0.500000 1.00000 (1204 pws)
+       1        2.04025     0.00150000
+       2        2.76917     0.00150000
+       3        13.2435        0.00000
+       4        13.5477        0.00000
+       5        14.0113        0.00000
+       6        15.7778        0.00000
+
+ 12/256 kpoint (Cartesian) = 1.05000 1.05000 1.90000 (1216 pws)
+       1       -3.24897     0.00600000
+       2        16.2209        0.00000
+       3        16.4023        0.00000
+       4        17.3782        0.00000
+       5        18.6843        0.00000
+       6        18.8852        0.00000
+
+ 13/256 kpoint (Cartesian) = 1.05000 1.10000 1.85000 (1216 pws)
+       1       -3.01637      0.0120000
+       2        14.3075        0.00000
+       3        15.4238        0.00000
+       4        16.5104        0.00000
+       5        17.9754        0.00000
+       6        18.7429        0.00000
+
+ 14/256 kpoint (Cartesian) = 1.05000 1.15000 1.80000 (1206 pws)
+       1       -2.66759      0.0120000
+       2        12.3886        0.00000
+       3        14.6168        0.00000
+       4        15.7184        0.00000
+       5        17.2263        0.00000
+       6        18.3653        0.00000
+
+ 15/256 kpoint (Cartesian) = 1.05000 1.20000 1.75000 (1208 pws)
+       1       -2.20284      0.0120000
+       2        10.5624        0.00000
+       3        13.9229        0.00000
+       4        15.0301        0.00000
+       5        16.5598        0.00000
+       6        17.8884        0.00000
+
+ 16/256 kpoint (Cartesian) = 1.05000 1.25000 1.70000 (1217 pws)
+       1       -1.62247      0.0120000
+       2        8.84091        0.00000
+       3        13.3432        0.00000
+       4        14.4529        0.00000
+       5        15.9954        0.00000
+       6        17.4410        0.00000
+
+ 17/256 kpoint (Cartesian) = 1.05000 1.30000 1.65000 (1217 pws)
+       1      -0.927185      0.0120000
+       2        7.22953        0.00000
+       3        12.8787        0.00000
+       4        13.9897        0.00000
+       5        15.5401        0.00000
+       6        17.0634        0.00000
+
+ 18/256 kpoint (Cartesian) = 1.05000 1.60000 1.35000 (1212 pws)
+       1      -0.118680      0.0120000
+       2        5.73245        0.00000
+       3        12.5299        0.00000
+       4        13.6415        0.00000
+       5        15.1969        0.00000
+       6        16.7717        0.00000
+
+ 19/256 kpoint (Cartesian) = 1.05000 1.40000 1.55000 (1216 pws)
+       1       0.797294      0.0120000
+       2        4.35681        0.00000
+       3        12.2972        0.00000
+       4        13.4092        0.00000
+       5        14.9675        0.00000
+       6        16.5740        0.00000
+
+ 20/256 kpoint (Cartesian) = 1.05000 1.45000 1.50000 (1218 pws)
+       1        1.77689      0.0120000
+       2        3.14722      0.0120000
+       3        12.1808        0.00000
+       4        13.2929        0.00000
+       5        14.8527        0.00000
+       6        16.4743        0.00000
+
+ 21/256 kpoint (Cartesian) = 1.10000 1.10000 1.80000 (1213 pws)
+       1       -2.72571     0.00600000
+       2        13.2776        0.00000
+       3        13.6674        0.00000
+       4        15.7336        0.00000
+       5        18.0233        0.00000
+       6        18.5188        0.00000
+
+ 22/256 kpoint (Cartesian) = 1.10000 1.15000 1.75000 (1211 pws)
+       1       -2.31898      0.0120000
+       2        11.5584        0.00000
+       3        12.7723        0.00000
+       4        15.0175        0.00000
+       5        17.5361        0.00000
+       6        18.6420        0.00000
+
+ 23/256 kpoint (Cartesian) = 1.10000 1.20000 1.70000 (1211 pws)
+       1       -1.79645      0.0120000
+       2        9.80224        0.00000
+       3        12.1225        0.00000
+       4        14.3979        0.00000
+       5        16.9722        0.00000
+       6        18.7933        0.00000
+
+ 24/256 kpoint (Cartesian) = 1.10000 1.25000 1.65000 (1216 pws)
+       1       -1.15862      0.0120000
+       2        8.14207        0.00000
+       3        11.5970        0.00000
+       4        13.8858        0.00000
+       5        16.4863        0.00000
+       6        18.6578        0.00000
+
+ 25/256 kpoint (Cartesian) = 1.10000 1.30000 1.60000 (1214 pws)
+       1      -0.406544      0.0120000
+       2        6.59067        0.00000
+       3        11.1892        0.00000
+       4        13.4852        0.00000
+       5        16.1009        0.00000
+       6        18.4042        0.00000
+
+ 26/256 kpoint (Cartesian) = 1.10000 1.55000 1.35000 (1215 pws)
+       1       0.456865      0.0120000
+       2        5.15472        0.00000
+       3        10.8980        0.00000
+       4        13.1982        0.00000
+       5        15.8229        0.00000
+       6        18.1858        0.00000
+
+ 27/256 kpoint (Cartesian) = 1.10000 1.40000 1.50000 (1215 pws)
+       1        1.41829      0.0120000
+       2        3.84925    0.000264686
+       3        10.7234        0.00000
+       4        13.0257        0.00000
+       5        15.6553        0.00000
+       6        18.0462        0.00000
+
+ 28/256 kpoint (Cartesian) = 1.10000 1.45000 1.45000 (1218 pws)
+       1        2.21620     0.00600000
+       2        2.93657     0.00600000
+       3        10.6651        0.00000
+       4        12.9681        0.00000
+       5        15.5993        0.00000
+       6        17.9987        0.00000
+
+ 29/256 kpoint (Cartesian) = 1.15000 1.15000 1.70000 (1216 pws)
+       1       -1.85446     0.00600000
+       2        10.6521        0.00000
+       3        11.1772        0.00000
+       4        14.3686        0.00000
+       5        17.7258        0.00000
+       6        18.3764        0.00000
+
+ 30/256 kpoint (Cartesian) = 1.15000 1.20000 1.65000 (1212 pws)
+       1       -1.27440      0.0120000
+       2        9.13047        0.00000
+       3        10.4072        0.00000
+       4        13.8124        0.00000
+       5        17.4254        0.00000
+       6        18.6837        0.00000
+
+ 31/256 kpoint (Cartesian) = 1.15000 1.25000 1.60000 (1212 pws)
+       1      -0.579511      0.0120000
+       2        7.54920        0.00000
+       3        9.91819        0.00000
+       4        13.3616        0.00000
+       5        17.0335        0.00000
+       6        19.2193        0.00000
+
+ 32/256 kpoint (Cartesian) = 1.15000 1.30000 1.55000 (1212 pws)
+       1       0.228529      0.0120000
+       2        6.06321        0.00000
+       3        9.56196        0.00000
+       4        13.0211        0.00000
+       5        16.7174        0.00000
+       6        19.6674        0.00000
+
+ 33/256 kpoint (Cartesian) = 1.15000 1.35000 1.50000 (1216 pws)
+       1        1.14414      0.0120000
+       2        4.69273        0.00000
+       3        9.32633        0.00000
+       4        12.7933        0.00000
+       5        16.5016        0.00000
+       6        19.7860        0.00000
+
+ 34/256 kpoint (Cartesian) = 1.15000 1.40000 1.45000 (1212 pws)
+       1        2.12516      0.0120000
+       2        3.48367      0.0119892
+       3        9.20884        0.00000
+       4        12.6791        0.00000
+       5        16.3926        0.00000
+       6        19.7675        0.00000
+
+ 35/256 kpoint (Cartesian) = 1.20000 1.20000 1.60000 (1216 pws)
+       1      -0.637203     0.00600000
+       2        8.37033        0.00000
+       3        8.99071        0.00000
+       4        13.3170        0.00000
+       5        17.7821        0.00000
+       6        18.5110        0.00000
+
+ 36/256 kpoint (Cartesian) = 1.20000 1.25000 1.55000 (1215 pws)
+       1       0.114054      0.0120000
+       2        7.04200        0.00000
+       3        8.36512        0.00000
+       4        12.9257        0.00000
+       5        17.6588        0.00000
+       6        18.9852        0.00000
+
+ 37/256 kpoint (Cartesian) = 1.20000 1.30000 1.50000 (1214 pws)
+       1       0.976524      0.0120000
+       2        5.64241        0.00000
+       3        8.04104        0.00000
+       4        12.6440        0.00000
+       5        17.4355        0.00000
+       6        19.7506        0.00000
+
+ 38/256 kpoint (Cartesian) = 1.20000 1.35000 1.45000 (1212 pws)
+       1        1.93768      0.0120000
+       2        4.34820        0.00000
+       3        7.85665        0.00000
+       4        12.4742        0.00000
+       5        17.2858        0.00000
+       6        20.6044        0.00000
+
+ 39/256 kpoint (Cartesian) = 1.40000 1.40000 1.20000 (1215 pws)
+       1        2.74403     0.00600000
+       2        3.42990     0.00599968
+       3        7.79600        0.00000
+       4        12.4176        0.00000
+       5        17.2345        0.00000
+       6        21.3040        0.00000
+
+ 40/256 kpoint (Cartesian) = 1.25000 1.25000 1.50000 (1211 pws)
+       1       0.920303     0.00600000
+       2        6.43735        0.00000
+       3        7.13378        0.00000
+       4        12.5930        0.00000
+       5        18.1907        0.00000
+       6        18.9404        0.00000
+
+ 41/256 kpoint (Cartesian) = 1.25000 1.30000 1.45000 (1209 pws)
+       1        1.83385      0.0120000
+       2        5.30380        0.00000
+       3        6.66558        0.00000
+       4        12.3693        0.00000
+       5        18.2357        0.00000
+       6        19.5704        0.00000
+
+ 42/256 kpoint (Cartesian) = 1.25000 1.35000 1.40000 (1209 pws)
+       1        2.81724      0.0120000
+       2        4.12785    1.85891e-11
+       3        6.51359        0.00000
+       4        12.2569        0.00000
+       5        18.1714        0.00000
+       6        20.4642        0.00000
+
+ 43/256 kpoint (Cartesian) = 1.30000 1.30000 1.40000 (1212 pws)
+       1        2.78796     0.00600000
+       2        4.85488        0.00000
+       3        5.64507        0.00000
+       4        12.2029        0.00000
+       5        18.9512        0.00000
+       6        19.6127        0.00000
+
+ 44/256 kpoint (Cartesian) = 1.30000 1.35000 1.35000 (1212 pws)
+       1        3.62365     0.00525674
+       2        4.10458    6.45135e-11
+       3        5.38772        0.00000
+       4        12.1472        0.00000
+       5        19.1187        0.00000
+       6        20.0631        0.00000
+
+ 45/256 kpoint (Cartesian) = 1.90000 1.90000 1.90000 (1214 pws)
+       1       -3.07451     0.00200000
+       2        15.2622        0.00000
+       3        15.2622        0.00000
+       4        15.6846        0.00000
+       5        19.7488        0.00000
+       6        19.7488        0.00000
+
+ 46/256 kpoint (Cartesian) = 1.85000 1.85000 1.90000 (1213 pws)
+       1       -2.78383     0.00600000
+       2        13.3868        0.00000
+       3        14.3961        0.00000
+       4        14.7900        0.00000
+       5        19.0778        0.00000
+       6        19.3960        0.00000
+
+ 47/256 kpoint (Cartesian) = 1.80000 1.80000 1.90000 (1206 pws)
+       1       -2.37708     0.00600000
+       2        11.5236        0.00000
+       3        13.6406        0.00000
+       4        14.0571        0.00000
+       5        18.3428        0.00000
+       6        18.8925        0.00000
+
+ 48/256 kpoint (Cartesian) = 1.75000 1.75000 1.90000 (1209 pws)
+       1       -1.85451     0.00600000
+       2        9.75362        0.00000
+       3        12.9994        0.00000
+       4        13.4346        0.00000
+       5        17.7084        0.00000
+       6        18.4182        0.00000
+
+ 49/256 kpoint (Cartesian) = 1.70000 1.70000 1.90000 (1219 pws)
+       1       -1.21662     0.00600000
+       2        8.08910        0.00000
+       3        12.4740        0.00000
+       4        12.9232        0.00000
+       5        17.1861        0.00000
+       6        18.0058        0.00000
+
+ 50/256 kpoint (Cartesian) = 1.65000 1.65000 1.90000 (1215 pws)
+       1      -0.464481     0.00600000
+       2        6.53574        0.00000
+       3        12.0649        0.00000
+       4        12.5241        0.00000
+       5        16.7787        0.00000
+       6        17.6730        0.00000
+
+ 51/256 kpoint (Cartesian) = 1.60000 1.60000 1.90000 (1212 pws)
+       1       0.398998     0.00600000
+       2        5.09878        0.00000
+       3        11.7726        0.00000
+       4        12.2384        0.00000
+       5        16.4873        0.00000
+       6        17.4298        0.00000
+
+ 52/256 kpoint (Cartesian) = 1.55000 1.55000 1.90000 (1212 pws)
+       1        1.36042     0.00600000
+       2        3.79286    0.000666404
+       3        11.5972        0.00000
+       4        12.0668        0.00000
+       5        16.3124        0.00000
+       6        17.2819        0.00000
+
+ 53/256 kpoint (Cartesian) = 1.50000 1.50000 1.90000 (1212 pws)
+       1        2.15764     0.00300000
+       2        2.88075     0.00300000
+       3        11.5387        0.00000
+       4        12.0096        0.00000
+       5        16.2540        0.00000
+       6        17.2323        0.00000
+
+ 54/256 kpoint (Cartesian) = 1.00000 1.00000 1.90000 (1225 pws)
+       1       -3.30713     0.00150000
+       2        16.9847        0.00000
+       3        16.9847        0.00000
+       4        17.8162        0.00000
+       5        18.1945        0.00000
+       6        18.9120        0.00000
+
+ 55/256 kpoint (Cartesian) = 1.80000 1.85000 1.85000 (1202 pws)
+       1       -2.43516     0.00600000
+       2        12.4095        0.00000
+       3        12.7952        0.00000
+       4        13.8891        0.00000
+       5        19.4564        0.00000
+       6        19.6964        0.00000
+
+ 56/256 kpoint (Cartesian) = 1.75000 1.85000 1.80000 (1207 pws)
+       1       -1.97057      0.0120000
+       2        10.7478        0.00000
+       3        11.9592        0.00000
+       4        13.2015        0.00000
+       5        18.9660        0.00000
+       6        19.7844        0.00000
+
+ 57/256 kpoint (Cartesian) = 1.70000 1.75000 1.85000 (1210 pws)
+       1       -1.39040      0.0120000
+       2        9.04935        0.00000
+       3        11.3656        0.00000
+       4        12.6305        0.00000
+       5        18.4335        0.00000
+       6        19.5747        0.00000
+
+ 58/256 kpoint (Cartesian) = 1.65000 1.70000 1.85000 (1216 pws)
+       1      -0.695362      0.0120000
+       2        7.44712        0.00000
+       3        10.8969        0.00000
+       4        12.1729        0.00000
+       5        17.9915        0.00000
+       6        19.2621        0.00000
+
+ 59/256 kpoint (Cartesian) = 1.65000 1.85000 1.60000 (1211 pws)
+       1       0.112857      0.0120000
+       2        5.95475        0.00000
+       3        10.5463        0.00000
+       4        11.8291        0.00000
+       5        17.6551        0.00000
+       6        18.9932        0.00000
+
+ 60/256 kpoint (Cartesian) = 1.60000 1.85000 1.55000 (1211 pws)
+       1        1.02863      0.0120000
+       2        4.58159        0.00000
+       3        10.3128        0.00000
+       4        11.5996        0.00000
+       5        17.4293        0.00000
+       6        18.8045        0.00000
+
+ 61/256 kpoint (Cartesian) = 1.50000 1.55000 1.85000 (1212 pws)
+       1        2.00925      0.0120000
+       2        3.37197      0.0120000
+       3        10.1961        0.00000
+       4        11.4848        0.00000
+       5        17.3160        0.00000
+       6        18.7081        0.00000
+
+ 62/256 kpoint (Cartesian) = 1.00000 1.85000 1.05000 (1217 pws)
+       1       -3.13266     0.00600000
+       2        15.2844        0.00000
+       3        16.0056        0.00000
+       4        17.0669        0.00000
+       5        17.8181        0.00000
+       6        18.3052        0.00000
+
+ 63/256 kpoint (Cartesian) = 1.70000 1.80000 1.80000 (1212 pws)
+       1       -1.44833     0.00600000
+       2        9.89494        0.00000
+       3        10.4293        0.00000
+       4        12.5684        0.00000
+       5        19.2948        0.00000
+       6        19.7627        0.00000
+
+ 64/256 kpoint (Cartesian) = 1.65000 1.75000 1.80000 (1214 pws)
+       1      -0.810893      0.0120000
+       2        8.43351        0.00000
+       3        9.71428        0.00000
+       4        12.0534        0.00000
+       5        19.0139        0.00000
+       6        20.1467        0.00000
+
+ 65/256 kpoint (Cartesian) = 1.60000 1.70000 1.80000 (1208 pws)
+       1     -0.0593018      0.0120000
+       2        6.91148        0.00000
+       3        9.28198        0.00000
+       4        11.6525        0.00000
+       5        18.6627        0.00000
+       6        20.5438        0.00000
+
+ 66/256 kpoint (Cartesian) = 1.55000 1.65000 1.80000 (1212 pws)
+       1       0.803587      0.0120000
+       2        5.48594        0.00000
+       3        8.98331        0.00000
+       4        11.3657        0.00000
+       5        18.3967        0.00000
+       6        20.6010        0.00000
+
+ 67/256 kpoint (Cartesian) = 1.50000 1.60000 1.80000 (1210 pws)
+       1        1.76500      0.0120000
+       2        4.18459    1.06585e-13
+       3        8.80572        0.00000
+       4        11.1935        0.00000
+       5        18.2341        0.00000
+       6        20.5336        0.00000
+
+ 68/256 kpoint (Cartesian) = 1.45000 1.55000 1.80000 (1208 pws)
+       1        2.56836     0.00600000
+       2        3.26763     0.00600000
+       3        8.74669        0.00000
+       4        11.1361        0.00000
+       5        18.1794        0.00000
+       6        20.5017        0.00000
+
+ 69/256 kpoint (Cartesian) = 1.00000 1.10000 1.80000 (1213 pws)
+       1       -2.84195     0.00600000
+       2        13.3457        0.00000
+       3        15.1341        0.00000
+       4        16.2826        0.00000
+       5        17.4739        0.00000
+       6        17.8229        0.00000
+
+ 70/256 kpoint (Cartesian) = 1.05000 1.05000 1.80000 (1219 pws)
+       1       -2.90008     0.00600000
+       2        14.2412        0.00000
+       3        14.5150        0.00000
+       4        16.7147        0.00000
+       5        17.0573        0.00000
+       6        18.0422        0.00000
+
+ 71/256 kpoint (Cartesian) = 1.60000 1.75000 1.75000 (1210 pws)
+       1      -0.116754     0.00600000
+       2        7.72796        0.00000
+       3        8.35939        0.00000
+       4        11.5954        0.00000
+       5        19.4739        0.00000
+       6        20.0685        0.00000
+
+ 72/256 kpoint (Cartesian) = 1.55000 1.70000 1.75000 (1213 pws)
+       1       0.690333      0.0120000
+       2        6.46105        0.00000
+       3        7.78940        0.00000
+       4        11.2518        0.00000
+       5        19.3806        0.00000
+       6        20.6313        0.00000
+
+ 73/256 kpoint (Cartesian) = 1.65000 1.75000 1.50000 (1209 pws)
+       1        1.60500      0.0120000
+       2        5.12465        0.00000
+       3        7.52283        0.00000
+       4        11.0225        0.00000
+       5        19.2012        0.00000
+       6        21.4227        0.00000
+
+ 74/256 kpoint (Cartesian) = 1.60000 1.75000 1.45000 (1210 pws)
+       1        2.58799      0.0120000
+       2        3.92252    1.40960e-05
+       3        7.39740        0.00000
+       4        10.9077        0.00000
+       5        19.1022        0.00000
+       6        22.1108        0.00000
+
+ 75/256 kpoint (Cartesian) = 1.00000 1.15000 1.75000 (1207 pws)
+       1       -2.43516     0.00600000
+       2        11.4745        0.00000
+       3        14.3764        0.00000
+       4        15.5630        0.00000
+       5        16.7285        0.00000
+       6        17.7154        0.00000
+
+ 76/256 kpoint (Cartesian) = 1.05000 1.10000 1.75000 (1208 pws)
+       1       -2.55135      0.0120000
+       2        12.4669        0.00000
+       3        13.6065        0.00000
+       4        16.0856        0.00000
+       5        16.8509        0.00000
+       6        17.6525        0.00000
+
+ 77/256 kpoint (Cartesian) = 1.50000 1.70000 1.70000 (1205 pws)
+       1        1.55055     0.00600000
+       2        5.91107        0.00000
+       3        6.62230        0.00000
+       4        10.9656        0.00000
+       5        20.0019        0.00000
+       6        20.6424        0.00000
+
+ 78/256 kpoint (Cartesian) = 1.65000 1.70000 1.45000 (1207 pws)
+       1        2.50961      0.0120000
+       2        4.84537        0.00000
+       3        6.21353        0.00000
+       4        10.7938        0.00000
+       5        20.0789        0.00000
+       6        21.3494        0.00000
+
+ 79/256 kpoint (Cartesian) = 1.60000 1.70000 1.40000 (1212 pws)
+       1        3.33094     0.00600000
+       2        3.93891    3.19997e-06
+       3        6.12668        0.00000
+       4        10.7365        0.00000
+       5        20.0532        0.00000
+       6        22.1084        0.00000
+
+ 80/256 kpoint (Cartesian) = 1.00000 1.20000 1.70000 (1208 pws)
+       1       -1.91255     0.00600000
+       2        9.70117        0.00000
+       3        13.7341        0.00000
+       4        14.9430        0.00000
+       5        16.0917        0.00000
+       6        17.4215        0.00000
+
+ 81/256 kpoint (Cartesian) = 1.05000 1.15000 1.70000 (1211 pws)
+       1       -2.08667      0.0120000
+       2        10.6608        0.00000
+       3        12.9051        0.00000
+       4        15.4109        0.00000
+       5        16.4391        0.00000
+       6        17.7356        0.00000
+
+ 82/256 kpoint (Cartesian) = 1.10000 1.10000 1.70000 (1208 pws)
+       1       -2.14472     0.00600000
+       2        11.5211        0.00000
+       3        11.9872        0.00000
+       4        16.0306        0.00000
+       5        16.2748        0.00000
+       6        17.3318        0.00000
+
+ 83/256 kpoint (Cartesian) = 1.40000 1.65000 1.65000 (1206 pws)
+       1        3.48251     0.00599490
+       2        4.44525        0.00000
+       3        5.29793        0.00000
+       4        10.6794        0.00000
+       5        20.8801        0.00000
+       6        21.3558        0.00000
+
+ 84/256 kpoint (Cartesian) = 1.00000 1.25000 1.65000 (1213 pws)
+       1       -1.27461     0.00600000
+       2        8.03483        0.00000
+       3        13.2082        0.00000
+       4        14.4314        0.00000
+       5        15.5685        0.00000
+       6        17.0794        0.00000
+
+ 85/256 kpoint (Cartesian) = 1.05000 1.20000 1.65000 (1215 pws)
+       1       -1.50638      0.0120000
+       2        8.94692        0.00000
+       3        12.3230        0.00000
+       4        14.8379        0.00000
+       5        15.9481        0.00000
+       6        17.9212        0.00000
+
+ 86/256 kpoint (Cartesian) = 1.10000 1.15000 1.65000 (1218 pws)
+       1       -1.62232      0.0120000
+       2        9.93617        0.00000
+       3        11.1803        0.00000
+       4        15.4308        0.00000
+       5        16.1003        0.00000
+       6        17.3909        0.00000
+
+ 87/256 kpoint (Cartesian) = 1.00000 1.30000 1.60000 (1215 pws)
+       1      -0.522393     0.00600000
+       2        6.48038        0.00000
+       3        12.7988        0.00000
+       4        14.0316        0.00000
+       5        15.1608        0.00000
+       6        16.7769        0.00000
+
+ 88/256 kpoint (Cartesian) = 1.05000 1.25000 1.60000 (1213 pws)
+       1      -0.811207      0.0120000
+       2        7.33928        0.00000
+       3        11.8575        0.00000
+       4        14.3768        0.00000
+       5        15.5242        0.00000
+       6        17.8887        0.00000
+
+ 89/256 kpoint (Cartesian) = 1.10000 1.20000 1.60000 (1219 pws)
+       1      -0.984648      0.0120000
+       2        8.29808        0.00000
+       3        10.6386        0.00000
+       4        14.9096        0.00000
+       5        15.7551        0.00000
+       6        17.8318        0.00000
+
+ 90/256 kpoint (Cartesian) = 1.15000 1.15000 1.60000 (1220 pws)
+       1       -1.04248     0.00600000
+       2        9.12781        0.00000
+       3        9.71181        0.00000
+       4        15.0377        0.00000
+       5        16.2070        0.00000
+       6        17.1714        0.00000
+
+ 91/256 kpoint (Cartesian) = 1.00000 1.35000 1.55000 (1212 pws)
+       1       0.341149     0.00600000
+       2        5.04277        0.00000
+       3        12.5063        0.00000
+       4        13.7452        0.00000
+       5        14.8692        0.00000
+       6        16.5480        0.00000
+
+ 92/256 kpoint (Cartesian) = 1.05000 1.30000 1.55000 (1214 pws)
+       1    -0.00282926      0.0120000
+       2        5.84426        0.00000
+       3        11.5083        0.00000
+       4        14.0299        0.00000
+       5        15.1976        0.00000
+       6        17.7207        0.00000
+
+ 93/256 kpoint (Cartesian) = 1.10000 1.25000 1.55000 (1214 pws)
+       1      -0.232777      0.0120000
+       2        6.75438        0.00000
+       3        10.2261        0.00000
+       4        14.5018        0.00000
+       5        15.4244        0.00000
+       6        18.4093        0.00000
+
+ 94/256 kpoint (Cartesian) = 1.15000 1.20000 1.55000 (1219 pws)
+       1      -0.347905      0.0120000
+       2        7.73604        0.00000
+       3        9.03954        0.00000
+       4        14.6164        0.00000
+       5        16.0932        0.00000
+       6        17.4941        0.00000
+
+ 95/256 kpoint (Cartesian) = 1.00000 1.40000 1.50000 (1217 pws)
+       1        1.30253     0.00600000
+       2        3.73657     0.00200116
+       3        12.3308        0.00000
+       4        13.5730        0.00000
+       5        14.6942        0.00000
+       6        16.4068        0.00000
+
+ 96/256 kpoint (Cartesian) = 1.05000 1.35000 1.50000 (1214 pws)
+       1       0.913049      0.0120000
+       2        4.46974        0.00000
+       3        11.2754        0.00000
+       4        13.7983        0.00000
+       5        14.9771        0.00000
+       6        17.5677        0.00000
+
+ 97/256 kpoint (Cartesian) = 1.10000 1.30000 1.50000 (1213 pws)
+       1       0.630406      0.0120000
+       2        5.32203        0.00000
+       3        9.93311        0.00000
+       4        14.2100        0.00000
+       5        15.1722        0.00000
+       6        18.9081        0.00000
+
+ 98/256 kpoint (Cartesian) = 1.15000 1.25000 1.50000 (1218 pws)
+       1       0.459745      0.0120000
+       2        6.27582        0.00000
+       3        8.66073        0.00000
+       4        14.2844        0.00000
+       5        15.8548        0.00000
+       6        18.1672        0.00000
+
+ 99/256 kpoint (Cartesian) = 1.20000 1.20000 1.50000 (1214 pws)
+       1       0.402720     0.00600000
+       2        7.07984        0.00000
+       3        7.74841        0.00000
+       4        14.2740        0.00000
+       5        16.4957        0.00000
+       6        17.4063        0.00000
+
+ 100/256 kpoint (Cartesian) = 1.00000 1.45000 1.45000 (1218 pws)
+       1        2.09881     0.00300000
+       2        2.82529     0.00300000
+       3        12.2723        0.00000
+       4        13.5156        0.00000
+       5        14.6358        0.00000
+       6        16.3591        0.00000
+
+ 101/256 kpoint (Cartesian) = 1.05000 1.40000 1.45000 (1219 pws)
+       1        1.89304      0.0120000
+       2        3.26019      0.0120000
+       3        11.1589        0.00000
+       4        13.6824        0.00000
+       5        14.8663        0.00000
+       6        17.4836        0.00000
+
+ 102/256 kpoint (Cartesian) = 1.10000 1.35000 1.45000 (1216 pws)
+       1        1.59180      0.0120000
+       2        4.01813    6.95480e-08
+       3        9.75763        0.00000
+       4        14.0347        0.00000
+       5        15.0169        0.00000
+       6        19.0900        0.00000
+
+ 103/256 kpoint (Cartesian) = 1.15000 1.30000 1.45000 (1218 pws)
+       1        1.37498      0.0120000
+       2        4.91331        0.00000
+       3        8.41889        0.00000
+       4        14.0594        0.00000
+       5        15.6664        0.00000
+       6        18.9934        0.00000
+
+ 104/256 kpoint (Cartesian) = 1.20000 1.25000 1.45000 (1216 pws)
+       1        1.26435      0.0120000
+       2        5.88068        0.00000
+       3        7.22747        0.00000
+       4        14.0094        0.00000
+       5        16.5232        0.00000
+       6        17.9259        0.00000
+
+ 105/256 kpoint (Cartesian) = 1.40000 1.40000 1.10000 (1214 pws)
+       1        2.39188     0.00600000
+       2        3.10375     0.00600000
+       3        9.69918        0.00000
+       4        13.9763        0.00000
+       5        14.9646        0.00000
+       6        19.1090        0.00000
+
+ 106/256 kpoint (Cartesian) = 1.15000 1.40000 1.35000 (1213 pws)
+       1        2.35678      0.0120000
+       2        3.70608     0.00599068
+       3        8.29937        0.00000
+       4        13.9462        0.00000
+       5        15.5674        0.00000
+       6        19.8912        0.00000
+
+ 107/256 kpoint (Cartesian) = 1.20000 1.30000 1.40000 (1215 pws)
+       1        2.22485      0.0120000
+       2        4.61463        0.00000
+       3        7.01682        0.00000
+       4        13.8464        0.00000
+       5        16.4276        0.00000
+       6        18.7694        0.00000
+
+ 108/256 kpoint (Cartesian) = 1.25000 1.25000 1.40000 (1215 pws)
+       1        2.17533     0.00600000
+       2        5.38120        0.00000
+       3        6.13039        0.00000
+       4        13.8062        0.00000
+       5        17.1379        0.00000
+       6        17.9523        0.00000
+
+ 109/256 kpoint (Cartesian) = 1.20000 1.35000 1.35000 (1214 pws)
+       1        3.03676     0.00600000
+       2        3.69591     0.00333598
+       3        6.95140        0.00000
+       4        13.7916        0.00000
+       5        16.3873        0.00000
+       6        19.4787        0.00000
+
+ 110/256 kpoint (Cartesian) = 1.25000 1.30000 1.35000 (1216 pws)
+       1        3.15800      0.0120000
+       2        4.40225        0.00000
+       3        5.78318        0.00000
+       4        13.7013        0.00000
+       5        17.3029        0.00000
+       6        18.5535        0.00000
+
+ 111/256 kpoint (Cartesian) = 1.30000 1.30000 1.30000 (1220 pws)
+       1        4.03331    4.25997e-09
+       2        4.03331    4.25997e-09
+       3        5.10555        0.00000
+       4        13.6512        0.00000
+       5        18.1325        0.00000
+       6        18.1325        0.00000
+
+ 112/256 kpoint (Cartesian) = 1.80000 1.80000 1.80000 (1220 pws)
+       1       -2.02861     0.00200000
+       2        11.6528        0.00000
+       3        11.6528        0.00000
+       4        12.4540        0.00000
+       5        20.8021        0.00000
+       6        20.8021        0.00000
+
+ 113/256 kpoint (Cartesian) = 1.75000 1.75000 1.80000 (1217 pws)
+       1       -1.50633     0.00600000
+       2        10.0324        0.00000
+       3        11.0110        0.00000
+       4        11.6917        0.00000
+       5        20.3711        0.00000
+       6        20.6515        0.00000
+
+ 114/256 kpoint (Cartesian) = 1.70000 1.70000 1.80000 (1217 pws)
+       1      -0.868807     0.00600000
+       2        8.40239        0.00000
+       3        10.4851        0.00000
+       4        11.1517        0.00000
+       5        19.8670        0.00000
+       6        20.3508        0.00000
+
+ 115/256 kpoint (Cartesian) = 1.65000 1.65000 1.80000 (1210 pws)
+       1      -0.117111     0.00600000
+       2        6.86280        0.00000
+       3        10.0758        0.00000
+       4        10.7429        0.00000
+       5        19.4653        0.00000
+       6        20.0731        0.00000
+
+ 116/256 kpoint (Cartesian) = 1.60000 1.80000 1.60000 (1202 pws)
+       1       0.745905     0.00600000
+       2        5.43262        0.00000
+       3        9.78335        0.00000
+       4        10.4531        0.00000
+       5        19.1762        0.00000
+       6        19.8581        0.00000
+
+ 117/256 kpoint (Cartesian) = 1.55000 1.80000 1.55000 (1210 pws)
+       1        1.70738     0.00600000
+       2        4.12963    7.98182e-12
+       3        9.60782        0.00000
+       4        10.2798        0.00000
+       5        19.0023        0.00000
+       6        19.7238        0.00000
+
+ 118/256 kpoint (Cartesian) = 1.50000 1.50000 1.80000 (1208 pws)
+       1        2.50980     0.00300000
+       2        3.21321     0.00300000
+       3        9.54930        0.00000
+       4        10.2221        0.00000
+       5        18.9442        0.00000
+       6        19.6782        0.00000
+
+ 119/256 kpoint (Cartesian) = 1.00000 1.00000 1.80000 (1217 pws)
+       1       -2.95822     0.00150000
+       2        15.0199        0.00000
+       3        15.0199        0.00000
+       4        15.8205        0.00000
+       5        16.6571        0.00000
+       6        19.2643        0.00000
+
+ 120/256 kpoint (Cartesian) = 1.70000 1.75000 1.75000 (1217 pws)
+       1      -0.926646     0.00600000
+       2        9.25275        0.00000
+       3        9.70744        0.00000
+       4        10.9173        0.00000
+       5        20.9678        0.00000
+       6        21.2186        0.00000
+
+ 121/256 kpoint (Cartesian) = 1.65000 1.70000 1.75000 (1212 pws)
+       1      -0.232249      0.0120000
+       2        7.84562        0.00000
+       3        9.08251        0.00000
+       4        10.4240        0.00000
+       5        20.7079        0.00000
+       6        21.5357        0.00000
+
+ 122/256 kpoint (Cartesian) = 1.60000 1.65000 1.75000 (1209 pws)
+       1       0.575199      0.0120000
+       2        6.38544        0.00000
+       3        8.71378        0.00000
+       4        10.0684        0.00000
+       5        20.4027        0.00000
+       6        21.5331        0.00000
+
+ 123/256 kpoint (Cartesian) = 1.55000 1.60000 1.75000 (1208 pws)
+       1        1.49031      0.0120000
+       2        5.02409        0.00000
+       3        8.47487        0.00000
+       4        9.83395        0.00000
+       5        20.1885        0.00000
+       6        21.4195        0.00000
+
+ 124/256 kpoint (Cartesian) = 1.50000 1.55000 1.75000 (1209 pws)
+       1        2.47297      0.0120000
+       2        3.81657    0.000721153
+       3        8.35629        0.00000
+       4        9.71720        0.00000
+       5        20.0796        0.00000
+       6        21.3470        0.00000
+
+ 125/256 kpoint (Cartesian) = 1.00000 1.05000 1.75000 (1213 pws)
+       1       -2.66757     0.00600000
+       2        13.4370        0.00000
+       3        14.1458        0.00000
+       4        15.2703        0.00000
+       5        16.2744        0.00000
+       6        18.7727        0.00000
+
+ 126/256 kpoint (Cartesian) = 1.60000 1.70000 1.70000 (1208 pws)
+       1       0.518160     0.00600000
+       2        7.20177        0.00000
+       3        7.81062        0.00000
+       4        9.98722        0.00000
+       5        21.2781        0.00000
+       6        21.7281        0.00000
+
+ 127/256 kpoint (Cartesian) = 1.55000 1.65000 1.70000 (1205 pws)
+       1        1.37959      0.0120000
+       2        5.99378        0.00000
+       3        7.30831        0.00000
+       4        9.68880        0.00000
+       5        21.2162        0.00000
+       6        22.3536        0.00000
+
+ 128/256 kpoint (Cartesian) = 1.50000 1.60000 1.70000 (1206 pws)
+       1        2.34022      0.0120000
+       2        4.72599        0.00000
+       3        7.10297        0.00000
+       4        9.51195        0.00000
+       5        21.0843        0.00000
+       6        22.9903        0.00000
+
+ 129/256 kpoint (Cartesian) = 1.45000 1.55000 1.70000 (1208 pws)
+       1        3.15527     0.00600000
+       2        3.80405    0.000504597
+       3        7.03865        0.00000
+       4        9.45324        0.00000
+       5        21.0363        0.00000
+       6        23.1741        0.00000
+
+ 130/256 kpoint (Cartesian) = 1.00000 1.10000 1.70000 (1208 pws)
+       1       -2.26086     0.00600000
+       2        11.6137        0.00000
+       3        13.3867        0.00000
+       4        14.6640        0.00000
+       5        16.4591        0.00000
+       6        18.0571        0.00000
+
+ 131/256 kpoint (Cartesian) = 1.05000 1.05000 1.70000 (1212 pws)
+       1       -2.31893     0.00600000
+       2        12.4863        0.00000
+       3        12.8025        0.00000
+       4        14.9598        0.00000
+       5        15.7037        0.00000
+       6        18.4880        0.00000
+
+ 132/256 kpoint (Cartesian) = 1.50000 1.65000 1.65000 (1205 pws)
+       1        2.29052     0.00600000
+       2        5.50149        0.00000
+       3        6.21329        0.00000
+       4        9.44812        0.00000
+       5        21.9266        0.00000
+       6        22.4552        0.00000
+
+ 133/256 kpoint (Cartesian) = 1.45000 1.60000 1.65000 (1205 pws)
+       1        3.27430      0.0120000
+       2        4.51597        0.00000
+       3        5.87464        0.00000
+       4        9.32939        0.00000
+       5        22.0325        0.00000
+       6        23.2224        0.00000
+
+ 134/256 kpoint (Cartesian) = 1.00000 1.15000 1.65000 (1212 pws)
+       1       -1.73836     0.00600000
+       2        9.85643        0.00000
+       3        12.7436        0.00000
+       4        14.0781        0.00000
+       5        16.8311        0.00000
+       6        17.4280        0.00000
+
+ 135/256 kpoint (Cartesian) = 1.05000 1.10000 1.65000 (1213 pws)
+       1       -1.85438      0.0120000
+       2        10.8426        0.00000
+       3        11.9944        0.00000
+       4        14.5547        0.00000
+       5        15.7825        0.00000
+       6        17.9151        0.00000
+
+ 136/256 kpoint (Cartesian) = 1.40000 1.60000 1.60000 (1199 pws)
+       1        4.15255    3.53663e-13
+       2        4.15255    3.53663e-13
+       3        5.19062        0.00000
+       4        9.26940        0.00000
+       5        22.9219        0.00000
+       6        22.9219        0.00000
+
+ 137/256 kpoint (Cartesian) = 1.00000 1.20000 1.60000 (1211 pws)
+       1       -1.10056     0.00600000
+       2        8.19748        0.00000
+       3        12.2172        0.00000
+       4        13.5817        0.00000
+       5        16.9080        0.00000
+       6        17.2269        0.00000
+
+ 138/256 kpoint (Cartesian) = 1.05000 1.15000 1.60000 (1215 pws)
+       1       -1.27427      0.0120000
+       2        9.15437        0.00000
+       3        11.4044        0.00000
+       4        14.0420        0.00000
+       5        16.1832        0.00000
+       6        17.4371        0.00000
+
+ 139/256 kpoint (Cartesian) = 1.10000 1.10000 1.60000 (1217 pws)
+       1       -1.33220     0.00600000
+       2        9.99717        0.00000
+       3        10.5070        0.00000
+       4        14.7531        0.00000
+       5        15.3584        0.00000
+       6        17.4534        0.00000
+
+ 140/256 kpoint (Cartesian) = 1.00000 1.25000 1.55000 (1215 pws)
+       1      -0.348521     0.00600000
+       2        6.64697        0.00000
+       3        11.8075        0.00000
+       4        13.1902        0.00000
+       5        16.5017        0.00000
+       6        17.4663        0.00000
+
+ 141/256 kpoint (Cartesian) = 1.05000 1.20000 1.55000 (1214 pws)
+       1      -0.579328      0.0120000
+       2        7.55688        0.00000
+       3        10.9366        0.00000
+       4        13.6035        0.00000
+       5        16.4912        0.00000
+       6        17.2877        0.00000
+
+ 142/256 kpoint (Cartesian) = 1.10000 1.15000 1.55000 (1221 pws)
+       1      -0.694822      0.0120000
+       2        8.54030        0.00000
+       3        9.80233        0.00000
+       4        14.4780        0.00000
+       5        15.6210        0.00000
+       6        17.0775        0.00000
+
+ 143/256 kpoint (Cartesian) = 1.00000 1.30000 1.50000 (1211 pws)
+       1       0.514838     0.00600000
+       2        5.21157        0.00000
+       3        11.5149        0.00000
+       4        12.9086        0.00000
+       5        16.2109        0.00000
+       6        17.4856        0.00000
+
+ 144/256 kpoint (Cartesian) = 1.05000 1.25000 1.50000 (1212 pws)
+       1       0.228779      0.0120000
+       2        6.06692        0.00000
+       3        10.5864        0.00000
+       4        13.2680        0.00000
+       5        16.3811        0.00000
+       6        17.7286        0.00000
+
+ 145/256 kpoint (Cartesian) = 1.10000 1.20000 1.50000 (1214 pws)
+       1      0.0566738      0.0120000
+       2        7.02215        0.00000
+       3        9.37226        0.00000
+       4        14.1138        0.00000
+       5        15.9733        0.00000
+       6        17.0226        0.00000
+
+ 146/256 kpoint (Cartesian) = 1.15000 1.15000 1.50000 (1220 pws)
+       1   -0.000760102     0.00600000
+       2        7.83748        0.00000
+       3        8.45956        0.00000
+       4        14.9189        0.00000
+       5        15.2734        0.00000
+       6        16.7772        0.00000
+
+ 147/256 kpoint (Cartesian) = 1.00000 1.45000 1.35000 (1211 pws)
+       1        1.47624     0.00600000
+       2        3.90638    1.46122e-05
+       3        11.3392        0.00000
+       4        12.7391        0.00000
+       5        16.0363        0.00000
+       6        17.4338        0.00000
+
+ 148/256 kpoint (Cartesian) = 1.05000 1.30000 1.45000 (1214 pws)
+       1        1.14444      0.0120000
+       2        4.69503        0.00000
+       3        10.3530        0.00000
+       4        13.0424        0.00000
+       5        16.2043        0.00000
+       6        18.2686        0.00000
+
+ 149/256 kpoint (Cartesian) = 1.10000 1.25000 1.45000 (1212 pws)
+       1       0.919435      0.0120000
+       2        5.59873        0.00000
+       3        9.07441        0.00000
+       4        13.8379        0.00000
+       5        15.9883        0.00000
+       6        17.5385        0.00000
+
+ 150/256 kpoint (Cartesian) = 1.15000 1.20000 1.45000 (1219 pws)
+       1       0.806210      0.0120000
+       2        6.57255        0.00000
+       3        7.89356        0.00000
+       4        14.7462        0.00000
+       5        15.5722        0.00000
+       6        16.7593        0.00000
+
+ 151/256 kpoint (Cartesian) = 1.00000 1.40000 1.40000 (1222 pws)
+       1        2.27449     0.00300000
+       2        2.99344     0.00300000
+       3        11.2807        0.00000
+       4        12.6825        0.00000
+       5        15.9780        0.00000
+       6        17.4087        0.00000
+
+ 152/256 kpoint (Cartesian) = 1.05000 1.35000 1.40000 (1211 pws)
+       1        2.12522      0.0120000
+       2        3.48573      0.0119881
+       3        10.2364        0.00000
+       4        12.9292        0.00000
+       5        16.1052        0.00000
+       6        18.5236        0.00000
+
+ 153/256 kpoint (Cartesian) = 1.10000 1.30000 1.40000 (1216 pws)
+       1        1.88073      0.0120000
+       2        4.29844    6.66134e-19
+       3        8.89718        0.00000
+       4        13.6697        0.00000
+       5        15.8982        0.00000
+       6        18.3571        0.00000
+
+ 154/256 kpoint (Cartesian) = 1.15000 1.25000 1.40000 (1215 pws)
+       1        1.72071      0.0120000
+       2        5.23789        0.00000
+       3        7.62801        0.00000
+       4        14.5288        0.00000
+       5        15.7024        0.00000
+       6        17.2679        0.00000
+
+ 155/256 kpoint (Cartesian) = 1.20000 1.20000 1.40000 (1217 pws)
+       1        1.66626     0.00600000
+       2        6.02377        0.00000
+       3        6.73101        0.00000
+       4        15.2134        0.00000
+       5        15.4417        0.00000
+       6        16.6886        0.00000
+
+ 156/256 kpoint (Cartesian) = 1.10000 1.35000 1.35000 (1214 pws)
+       1        2.68462     0.00600000
+       2        3.38123     0.00599998
+       3        8.83825        0.00000
+       4        13.6133        0.00000
+       5        15.8596        0.00000
+       6        19.1278        0.00000
+
+ 157/256 kpoint (Cartesian) = 1.15000 1.30000 1.35000 (1216 pws)
+       1        2.70361      0.0120000
+       2        4.03656    2.05116e-08
+       3        7.50290        0.00000
+       4        14.4162        0.00000
+       5        15.6869        0.00000
+       6        18.0617        0.00000
+
+ 158/256 kpoint (Cartesian) = 1.20000 1.25000 1.35000 (1219 pws)
+       1        2.62508      0.0120000
+       2        4.95905        0.00000
+       3        6.32380        0.00000
+       4        15.0802        0.00000
+       5        15.7436        0.00000
+       6        17.0608        0.00000
+
+ 159/256 kpoint (Cartesian) = 1.20000 1.30000 1.30000 (1212 pws)
+       1        3.44643     0.00599920
+       2        4.05291    3.28579e-09
+       3        6.23724        0.00000
+       4        15.0246        0.00000
+       5        15.8010        0.00000
+       6        17.5472        0.00000
+
+ 160/256 kpoint (Cartesian) = 1.25000 1.25000 1.30000 (1212 pws)
+       1        3.59762     0.00561562
+       2        4.55967        0.00000
+       3        5.40972        0.00000
+       4        15.1468        0.00000
+       5        16.3182        0.00000
+       6        16.9247        0.00000
+
+ 161/256 kpoint (Cartesian) = 1.70000 1.70000 1.70000 (1223 pws)
+       1      -0.289935     0.00200000
+       2        8.72669        0.00000
+       3        8.72669        0.00000
+       4        9.73276        0.00000
+       5        22.5572        0.00000
+       6        22.5572        0.00000
+
+ 162/256 kpoint (Cartesian) = 1.65000 1.65000 1.70000 (1213 pws)
+       1       0.460705     0.00600000
+       2        7.35491        0.00000
+       3        8.31725        0.00000
+       4        9.15911        0.00000
+       5        22.3654        0.00000
+       6        22.6145        0.00000
+
+ 163/256 kpoint (Cartesian) = 1.60000 1.60000 1.70000 (1213 pws)
+       1        1.32248     0.00600000
+       2        5.96772        0.00000
+       3        8.02467        0.00000
+       4        8.82864        0.00000
+       5        22.0940        0.00000
+       6        22.5190        0.00000
+
+ 164/256 kpoint (Cartesian) = 1.55000 1.55000 1.70000 (1207 pws)
+       1        2.28349     0.00600000
+       2        4.67954        0.00000
+       3        7.84908        0.00000
+       4        8.64143        0.00000
+       5        21.9250        0.00000
+       6        22.4360        0.00000
+
+ 165/256 kpoint (Cartesian) = 1.50000 1.50000 1.70000 (1210 pws)
+       1        3.09671     0.00300000
+       2        3.75608    0.000721946
+       3        7.79055        0.00000
+       4        8.58010        0.00000
+       5        21.8682        0.00000
+       6        22.4050        0.00000
+
+ 166/256 kpoint (Cartesian) = 1.00000 1.00000 1.70000 (1217 pws)
+       1       -2.37701     0.00150000
+       2        13.2702        0.00000
+       3        13.2702        0.00000
+       4        14.0592        0.00000
+       5        15.1767        0.00000
+       6        19.8515        0.00000
+
+ 167/256 kpoint (Cartesian) = 1.60000 1.65000 1.65000 (1205 pws)
+       1        1.26620     0.00600000
+       2        6.79224        0.00000
+       3        7.28281        0.00000
+       4        8.57514        0.00000
+       5        23.1810        0.00000
+       6        23.4346        0.00000
+
+ 168/256 kpoint (Cartesian) = 1.55000 1.60000 1.65000 (1207 pws)
+       1        2.17907      0.0120000
+       2        5.63827        0.00000
+       3        6.88611        0.00000
+       4        8.29410        0.00000
+       5        23.1465        0.00000
+       6        23.9807        0.00000
+
+ 169/256 kpoint (Cartesian) = 1.50000 1.55000 1.65000 (1207 pws)
+       1        3.16423      0.0120000
+       2        4.45905        0.00000
+       3        6.74998        0.00000
+       4        8.16441        0.00000
+       5        23.0621        0.00000
+       6        24.1513        0.00000
+
+ 170/256 kpoint (Cartesian) = 1.00000 1.05000 1.65000 (1214 pws)
+       1       -1.97044     0.00600000
+       2        11.8091        0.00000
+       3        12.5102        0.00000
+       4        13.6577        0.00000
+       5        14.8364        0.00000
+       6        19.4760        0.00000
+
+ 171/256 kpoint (Cartesian) = 1.50000 1.60000 1.60000 (1204 pws)
+       1        3.13323     0.00600000
+       2        5.20881        0.00000
+       3        5.89279        0.00000
+       4        8.07397        0.00000
+       5        23.9580        0.00000
+       6        24.3524        0.00000
+
+ 172/256 kpoint (Cartesian) = 1.45000 1.55000 1.60000 (1211 pws)
+       1        3.97689    4.23923e-07
+       2        4.44169        0.00000
+       3        5.65392        0.00000
+       4        8.00653        0.00000
+       5        24.0773        0.00000
+       6        25.0676        0.00000
+
+ 173/256 kpoint (Cartesian) = 1.00000 1.10000 1.60000 (1215 pws)
+       1       -1.44814     0.00600000
+       2        10.1047        0.00000
+       3        11.8667        0.00000
+       4        13.2062        0.00000
+       5        15.1007        0.00000
+       6        18.8768        0.00000
+
+ 174/256 kpoint (Cartesian) = 1.05000 1.05000 1.60000 (1217 pws)
+       1       -1.50610     0.00600000
+       2        10.9633        0.00000
+       3        11.3043        0.00000
+       4        13.4362        0.00000
+       5        14.3683        0.00000
+       6        19.2796        0.00000
+
+ 175/256 kpoint (Cartesian) = 1.00000 1.15000 1.55000 (1218 pws)
+       1      -0.810592     0.00600000
+       2        8.46437        0.00000
+       3        11.3399        0.00000
+       4        12.7468        0.00000
+       5        15.6299        0.00000
+       6        18.3646        0.00000
+
+ 176/256 kpoint (Cartesian) = 1.05000 1.10000 1.55000 (1220 pws)
+       1      -0.926286      0.0120000
+       2        9.44574        0.00000
+       3        10.6051        0.00000
+       4        13.1815        0.00000
+       5        14.5326        0.00000
+       6        18.7901        0.00000
+
+ 177/256 kpoint (Cartesian) = 1.00000 1.20000 1.50000 (1211 pws)
+       1     -0.0588736     0.00600000
+       2        6.92259        0.00000
+       3        10.9300        0.00000
+       4        12.3689        0.00000
+       5        16.2974        0.00000
+       6        17.9614        0.00000
+
+ 178/256 kpoint (Cartesian) = 1.05000 1.15000 1.50000 (1214 pws)
+       1      -0.231715      0.0120000
+       2        7.87663        0.00000
+       3        10.1290        0.00000
+       4        12.8037        0.00000
+       5        15.0913        0.00000
+       6        18.3609        0.00000
+
+ 179/256 kpoint (Cartesian) = 1.10000 1.10000 1.50000 (1227 pws)
+       1      -0.289365     0.00600000
+       2        8.70710        0.00000
+       3        9.24617        0.00000
+       4        13.4640        0.00000
+       5        14.2688        0.00000
+       6        18.3798        0.00000
+
+ 180/256 kpoint (Cartesian) = 1.00000 1.25000 1.45000 (1221 pws)
+       1       0.804148     0.00600000
+       2        5.49180        0.00000
+       3        10.6372        0.00000
+       4        12.0934        0.00000
+       5        17.0516        0.00000
+       6        17.6720        0.00000
+
+ 181/256 kpoint (Cartesian) = 1.05000 1.20000 1.45000 (1211 pws)
+       1       0.575940      0.0120000
+       2        6.39790        0.00000
+       3        9.77663        0.00000
+       4        12.4868        0.00000
+       5        15.8154        0.00000
+       6        18.0355        0.00000
+
+ 182/256 kpoint (Cartesian) = 1.10000 1.15000 1.45000 (1212 pws)
+       1       0.461535      0.0120000
+       2        7.37551        0.00000
+       3        8.64970        0.00000
+       4        13.3458        0.00000
+       5        14.6799        0.00000
+       6        18.0097        0.00000
+
+ 183/256 kpoint (Cartesian) = 1.00000 1.30000 1.40000 (1212 pws)
+       1        1.76554     0.00600000
+       2        4.18869    3.58253e-14
+       3        10.4615        0.00000
+       4        11.9266        0.00000
+       5        17.4980        0.00000
+       6        17.8070        0.00000
+
+ 184/256 kpoint (Cartesian) = 1.05000 1.25000 1.40000 (1209 pws)
+       1        1.49121      0.0120000
+       2        5.03134        0.00000
+       3        9.54243        0.00000
+       4        12.2686        0.00000
+       5        16.6273        0.00000
+       6        17.8390        0.00000
+
+ 185/256 kpoint (Cartesian) = 1.10000 1.20000 1.40000 (1213 pws)
+       1        1.32359      0.0120000
+       2        5.97946        0.00000
+       3        8.33336        0.00000
+       4        13.1172        0.00000
+       5        15.4266        0.00000
+       6        17.7228        0.00000
+
+ 186/256 kpoint (Cartesian) = 1.15000 1.15000 1.40000 (1210 pws)
+       1        1.26738     0.00600000
+       2        6.78152        0.00000
+       3        7.43303        0.00000
+       4        13.8642        0.00000
+       5        14.5660        0.00000
+       6        17.6727        0.00000
+
+ 187/256 kpoint (Cartesian) = 1.00000 1.35000 1.35000 (1198 pws)
+       1        2.56723     0.00300000
+       2        3.27294     0.00300000
+       3        10.4030        0.00000
+       4        11.8708        0.00000
+       5        17.4400        0.00000
+       6        18.2333        0.00000
+
+ 188/256 kpoint (Cartesian) = 1.05000 1.30000 1.35000 (1206 pws)
+       1        2.47316      0.0120000
+       2        3.82289    0.000602634
+       3        9.42545        0.00000
+       4        12.1582        0.00000
+       5        17.3013        0.00000
+       6        17.9157        0.00000
+
+ 189/256 kpoint (Cartesian) = 1.10000 1.25000 1.35000 (1210 pws)
+       1        2.28459      0.0120000
+       2        4.68771        0.00000
+       3        8.15147        0.00000
+       4        12.9628        0.00000
+       5        16.2803        0.00000
+       6        17.4948        0.00000
+
+ 190/256 kpoint (Cartesian) = 1.15000 1.20000 1.35000 (1212 pws)
+       1        2.18050      0.0120000
+       2        5.64454        0.00000
+       3        6.97879        0.00000
+       4        13.8933        0.00000
+       5        15.1629        0.00000
+       6        17.3545        0.00000
+
+ 191/256 kpoint (Cartesian) = 1.10000 1.30000 1.30000 (1214 pws)
+       1        3.09429     0.00600000
+       2        3.76681     0.00117763
+       3        8.09146        0.00000
+       4        12.9099        0.00000
+       5        16.9712        0.00000
+       6        17.1959        0.00000
+
+ 192/256 kpoint (Cartesian) = 1.25000 1.30000 1.15000 (1210 pws)
+       1        3.16451      0.0120000
+       2        4.46787        0.00000
+       3        6.83080        0.00000
+       4        13.8186        0.00000
+       5        16.0355        0.00000
+       6        16.8657        0.00000
+
+ 193/256 kpoint (Cartesian) = 1.20000 1.20000 1.30000 (1210 pws)
+       1        3.13442     0.00600000
+       2        5.20229        0.00000
+       3        5.96093        0.00000
+       4        14.6214        0.00000
+       5        15.1580        0.00000
+       6        16.8027        0.00000
+
+ 194/256 kpoint (Cartesian) = 1.20000 1.25000 1.25000 (1210 pws)
+       1        3.97282    5.33354e-07
+       2        4.44719        0.00000
+       3        5.70815        0.00000
+       4        14.7637        0.00000
+       5        15.7324        0.00000
+       6        16.1114        0.00000
+
+ 195/256 kpoint (Cartesian) = 1.60000 1.60000 1.60000 (1199 pws)
+       1        2.12432     0.00200000
+       2        6.49960        0.00000
+       3        6.49960        0.00000
+       4        7.64579        0.00000
+       5        25.0025        0.00000
+       6        25.0025        0.00000
+
+ 196/256 kpoint (Cartesian) = 1.55000 1.55000 1.60000 (1208 pws)
+       1        3.08170     0.00600000
+       2        5.38029        0.00000
+       3        6.32398        0.00000
+       4        7.29402        0.00000
+       5        25.0539        0.00000
+       6        25.2334        0.00000
+
+ 197/256 kpoint (Cartesian) = 1.50000 1.50000 1.60000 (1210 pws)
+       1        3.91833    4.27685e-06
+       2        4.46293        0.00000
+       3        6.26543        0.00000
+       4        7.20337        0.00000
+       5        25.0097        0.00000
+       6        25.2719        0.00000
+
+ 198/256 kpoint (Cartesian) = 1.00000 1.00000 1.60000 (1216 pws)
+       1       -1.56409     0.00150000
+       2        11.7497        0.00000
+       3        11.7497        0.00000
+       4        12.5327        0.00000
+       5        13.8316        0.00000
+       6        20.6735        0.00000
+
+ 199/256 kpoint (Cartesian) = 1.50000 1.55000 1.55000 (1210 pws)
+       1        4.05756    2.35578e-09
+       2        5.03317        0.00000
+       3        5.58195        0.00000
+       4        6.94796        0.00000
+       5        26.0631        0.00000
+       6        26.2920        0.00000
+
+ 200/256 kpoint (Cartesian) = 1.00000 1.05000 1.55000 (1210 pws)
+       1       -1.04207     0.00600000
+       2        10.4097        0.00000
+       3        11.1058        0.00000
+       4        12.2647        0.00000
+       5        13.5612        0.00000
+       6        20.4139        0.00000
+
+ 201/256 kpoint (Cartesian) = 1.00000 1.10000 1.50000 (1212 pws)
+       1      -0.404913     0.00600000
+       2        8.82485        0.00000
+       3        10.5788        0.00000
+       4        11.9542        0.00000
+       5        13.9055        0.00000
+       6        19.9312        0.00000
+
+ 202/256 kpoint (Cartesian) = 1.05000 1.05000 1.50000 (1215 pws)
+       1      -0.462671     0.00600000
+       2        9.67369        0.00000
+       3        10.0308        0.00000
+       4        12.1461        0.00000
+       5        13.1933        0.00000
+       6        20.3006        0.00000
+
+ 203/256 kpoint (Cartesian) = 1.00000 1.15000 1.45000 (1214 pws)
+       1       0.346311     0.00600000
+       2        7.30287        0.00000
+       3        10.1688        0.00000
+       4        11.6179        0.00000
+       5        14.5461        0.00000
+       6        19.5357        0.00000
+
+ 204/256 kpoint (Cartesian) = 1.05000 1.10000 1.45000 (1210 pws)
+       1       0.231340      0.0120000
+       2        8.27994        0.00000
+       3        9.44419        0.00000
+       4        12.0260        0.00000
+       5        13.4438        0.00000
+       6        19.8640        0.00000
+
+ 205/256 kpoint (Cartesian) = 1.00000 1.20000 1.40000 (1215 pws)
+       1        1.20878     0.00600000
+       2        5.88126        0.00000
+       3        9.87590        0.00000
+       4        11.3566        0.00000
+       5        15.3469        0.00000
+       6        19.2493        0.00000
+
+ 206/256 kpoint (Cartesian) = 1.05000 1.15000 1.40000 (1210 pws)
+       1        1.03829      0.0120000
+       2        6.83107        0.00000
+       3        9.08325        0.00000
+       4        11.7748        0.00000
+       5        14.1068        0.00000
+       6        19.2988        0.00000
+
+ 207/256 kpoint (Cartesian) = 1.10000 1.10000 1.40000 (1211 pws)
+       1       0.981328     0.00600000
+       2        7.65131        0.00000
+       3        8.21180        0.00000
+       4        12.4087        0.00000
+       5        13.3001        0.00000
+       6        19.2451        0.00000
+
+ 208/256 kpoint (Cartesian) = 1.00000 1.35000 1.25000 (1206 pws)
+       1        2.17007     0.00600000
+       2        4.58219        0.00000
+       3        9.70014        0.00000
+       4        11.1953        0.00000
+       5        16.2629        0.00000
+       6        18.4596        0.00000
+
+ 209/256 kpoint (Cartesian) = 1.05000 1.20000 1.35000 (1213 pws)
+       1        1.95290      0.0120000
+       2        5.47581        0.00000
+       3        8.84697        0.00000
+       4        11.5756        0.00000
+       5        14.9524        0.00000
+       6        18.2718        0.00000
+
+ 210/256 kpoint (Cartesian) = 1.10000 1.15000 1.35000 (1214 pws)
+       1        1.84222      0.0120000
+       2        6.44454        0.00000
+       3        7.72731        0.00000
+       4        12.4216        0.00000
+       5        13.8076        0.00000
+       6        18.1600        0.00000
+
+ 211/256 kpoint (Cartesian) = 1.00000 1.30000 1.30000 (1208 pws)
+       1        2.97691     0.00300000
+       2        3.66244     0.00218818
+       3        9.64155        0.00000
+       4        11.1410        0.00000
+       5        17.0788        0.00000
+       6        17.5680        0.00000
+
+ 212/256 kpoint (Cartesian) = 1.05000 1.25000 1.30000 (1212 pws)
+       1        2.93633      0.0120000
+       2        4.26985    1.39888e-17
+       3        8.72935        0.00000
+       4        11.4713        0.00000
+       5        15.8853        0.00000
+       6        17.1621        0.00000
+
+ 213/256 kpoint (Cartesian) = 1.10000 1.30000 1.20000 (1212 pws)
+       1        2.80245      0.0120000
+       2        5.17986        0.00000
+       3        7.52675        0.00000
+       4        12.3135        0.00000
+       5        14.6564        0.00000
+       6        16.9732        0.00000
+
+ 214/256 kpoint (Cartesian) = 1.15000 1.15000 1.30000 (1210 pws)
+       1        2.75258     0.00600000
+       2        5.96011        0.00000
+       3        6.64231        0.00000
+       4        13.0434        0.00000
+       5        13.8050        0.00000
+       6        16.9123        0.00000
+
+ 215/256 kpoint (Cartesian) = 1.10000 1.25000 1.25000 (1214 pws)
+       1        3.62069     0.00530655
+       2        4.25574    3.43059e-17
+       3        7.46350        0.00000
+       4        12.2694        0.00000
+       5        15.3809        0.00000
+       6        16.1364        0.00000
+
+ 216/256 kpoint (Cartesian) = 1.20000 1.25000 1.15000 (1212 pws)
+       1        3.73647     0.00400825
+       2        4.97274        0.00000
+       3        6.31144        0.00000
+       4        13.1932        0.00000
+       5        14.4335        0.00000
+       6        15.8082        0.00000
+
+ 217/256 kpoint (Cartesian) = 1.20000 1.20000 1.20000 (1208 pws)
+       1        4.61547        0.00000
+       2        4.61547        0.00000
+       3        5.62445        0.00000
+       4        14.0353        0.00000
+       5        14.0353        0.00000
+       6        15.1947        0.00000
+
+ 218/256 kpoint (Cartesian) = 1.50000 1.50000 1.50000 (1220 pws)
+       1        4.97461        0.00000
+       2        4.97461        0.00000
+       3        4.97461        0.00000
+       4        6.46721        0.00000
+       5        27.6520        0.00000
+       6        27.6520        0.00000
+
+ 219/256 kpoint (Cartesian) = 1.00000 1.00000 1.50000 (1208 pws)
+       1      -0.520462     0.00150000
+       2        10.4617        0.00000
+       3        10.4617        0.00000
+       4        11.2410        0.00000
+       5        12.6594        0.00000
+       6        21.7304        0.00000
+
+ 220/256 kpoint (Cartesian) = 1.00000 1.05000 1.45000 (1205 pws)
+       1       0.116135     0.00600000
+       2        9.24183        0.00000
+       3        9.93452        0.00000
+       4        11.0997        0.00000
+       5        12.4736        0.00000
+       6        20.9943        0.00000
+
+ 221/256 kpoint (Cartesian) = 1.00000 1.10000 1.40000 (1208 pws)
+       1       0.866626     0.00600000
+       2        7.77674        0.00000
+       3        9.52440        0.00000
+       4        10.9212        0.00000
+       5        12.9042        0.00000
+       6        19.5443        0.00000
+
+ 222/256 kpoint (Cartesian) = 1.05000 1.05000 1.40000 (1210 pws)
+       1       0.809335     0.00600000
+       2        8.61821        0.00000
+       3        8.98640        0.00000
+       4        11.0903        0.00000
+       5        12.2064        0.00000
+       6        19.5109        0.00000
+
+ 223/256 kpoint (Cartesian) = 1.00000 1.15000 1.35000 (1211 pws)
+       1        1.72824     0.00600000
+       2        6.37527        0.00000
+       3        9.23142        0.00000
+       4        10.7047        0.00000
+       5        13.6451        0.00000
+       6        18.1718        0.00000
+
+ 224/256 kpoint (Cartesian) = 1.05000 1.10000 1.35000 (1212 pws)
+       1        1.61522      0.0120000
+       2        7.34716        0.00000
+       3        8.51425        0.00000
+       4        11.0965        0.00000
+       5        12.5464        0.00000
+       6        18.0771        0.00000
+
+ 225/256 kpoint (Cartesian) = 1.00000 1.30000 1.20000 (1210 pws)
+       1        2.68918     0.00600000
+       2        5.08437        0.00000
+       3        9.05562        0.00000
+       4        10.5575        0.00000
+       5        14.5370        0.00000
+       6        16.9181        0.00000
+
+ 226/256 kpoint (Cartesian) = 1.15000 1.30000 1.05000 (1209 pws)
+       1        2.52868      0.0120000
+       2        6.02192        0.00000
+       3        8.26931        0.00000
+       4        10.9655        0.00000
+       5        13.2998        0.00000
+       6        16.7512        0.00000
+
+ 227/256 kpoint (Cartesian) = 1.10000 1.10000 1.30000 (1208 pws)
+       1        2.47416     0.00600000
+       2        6.83000        0.00000
+       3        7.40895        0.00000
+       4        11.5876        0.00000
+       5        12.5032        0.00000
+       6        16.6944        0.00000
+
+ 228/256 kpoint (Cartesian) = 1.00000 1.25000 1.25000 (1214 pws)
+       1        3.50332     0.00299336
+       2        4.15951    2.81685e-13
+       3        8.99702        0.00000
+       4        10.5066        0.00000
+       5        15.2637        0.00000
+       6        16.0725        0.00000
+
+ 229/256 kpoint (Cartesian) = 1.05000 1.20000 1.25000 (1212 pws)
+       1        3.51378      0.0119583
+       2        4.82308        0.00000
+       3        8.14986        0.00000
+       4        10.8783        0.00000
+       5        14.1778        0.00000
+       6        15.6112        0.00000
+
+ 230/256 kpoint (Cartesian) = 1.10000 1.25000 1.15000 (1217 pws)
+       1        3.43249      0.0119993
+       2        5.75344        0.00000
+       3        7.04092        0.00000
+       4        11.7180        0.00000
+       5        13.0755        0.00000
+       6        15.4538        0.00000
+
+ 231/256 kpoint (Cartesian) = 1.10000 1.20000 1.20000 (1215 pws)
+       1        4.26336    1.46549e-17
+       2        4.83618        0.00000
+       3        6.96275        0.00000
+       4        11.7090        0.00000
+       5        13.6835        0.00000
+       6        14.6773        0.00000
+
+ 232/256 kpoint (Cartesian) = 1.15000 1.15000 1.20000 (1216 pws)
+       1        4.40734        0.00000
+       2        5.37333        0.00000
+       3        6.12813        0.00000
+       4        12.4571        0.00000
+       5        13.0033        0.00000
+       6        14.4213        0.00000
+
+ 233/256 kpoint (Cartesian) = 1.00000 1.00000 1.40000 (1200 pws)
+       1       0.751950     0.00150000
+       2        9.40721        0.00000
+       3        9.40721        0.00000
+       4        10.1841        0.00000
+       5        11.6772        0.00000
+       6        19.4854        0.00000
+
+ 234/256 kpoint (Cartesian) = 1.00000 1.05000 1.35000 (1208 pws)
+       1        1.50138     0.00600000
+       2        8.30691        0.00000
+       3        8.99702        0.00000
+       4        10.1656        0.00000
+       5        11.5819        0.00000
+       6        17.9871        0.00000
+
+ 235/256 kpoint (Cartesian) = 1.10000 1.30000 1.00000 (1213 pws)
+       1        2.36164     0.00600000
+       2        6.96254        0.00000
+       3        8.70399        0.00000
+       4        10.1114        0.00000
+       5        12.0991        0.00000
+       6        16.5921        0.00000
+
+ 236/256 kpoint (Cartesian) = 1.05000 1.05000 1.30000 (1218 pws)
+       1        2.30564     0.00600000
+       2        7.79712        0.00000
+       3        8.17337        0.00000
+       4        10.2689        0.00000
+       5        11.4104        0.00000
+       6        16.5372        0.00000
+
+ 237/256 kpoint (Cartesian) = 1.15000 1.25000 1.00000 (1217 pws)
+       1        3.32171     0.00600000
+       2        5.69019        0.00000
+       3        8.52816        0.00000
+       4        10.0091        0.00000
+       5        12.9120        0.00000
+       6        15.3408        0.00000
+
+ 238/256 kpoint (Cartesian) = 1.10000 1.25000 1.05000 (1220 pws)
+       1        3.21709      0.0120000
+       2        6.64978        0.00000
+       3        7.81717        0.00000
+       4        10.3942        0.00000
+       5        11.8289        0.00000
+       6        15.2135        0.00000
+
+ 239/256 kpoint (Cartesian) = 1.00000 1.20000 1.20000 (1208 pws)
+       1        4.14599    9.54762e-13
+       2        4.75971        0.00000
+       3        8.46954        0.00000
+       4        9.96780        0.00000
+       5        13.5663        0.00000
+       6        14.5492        0.00000
+
+ 240/256 kpoint (Cartesian) = 1.05000 1.15000 1.20000 (1221 pws)
+       1        4.20354    1.65534e-14
+       2        5.47485        0.00000
+       3        7.68947        0.00000
+       4        10.3707        0.00000
+       5        12.5824        0.00000
+       6        14.1121        0.00000
+
+ 241/256 kpoint (Cartesian) = 1.10000 1.10000 1.20000 (1219 pws)
+       1        4.17036    2.06259e-13
+       2        6.24329        0.00000
+       3        6.84848        0.00000
+       4        11.0011        0.00000
+       5        11.8179        0.00000
+       6        14.0093        0.00000
+
+ 242/256 kpoint (Cartesian) = 1.10000 1.15000 1.15000 (1216 pws)
+       1        5.02125        0.00000
+       2        5.46456        0.00000
+       3        6.62394        0.00000
+       4        11.2002        0.00000
+       5        12.1052        0.00000
+       6        13.3314        0.00000
+
+ 243/256 kpoint (Cartesian) = 1.00000 1.00000 1.30000 (1212 pws)
+       1        2.24927     0.00150000
+       2        8.58677        0.00000
+       3        8.58677        0.00000
+       4        9.36206        0.00000
+       5        10.8868        0.00000
+       6        16.4828        0.00000
+
+ 244/256 kpoint (Cartesian) = 1.05000 1.25000 1.00000 (1226 pws)
+       1        3.10740     0.00600000
+       2        7.60586        0.00000
+       3        8.29370        0.00000
+       4        9.46310        0.00000
+       5        10.8753        0.00000
+       6        15.0936        0.00000
+
+ 245/256 kpoint (Cartesian) = 1.10000 1.20000 1.00000 (1221 pws)
+       1        4.06550    1.32216e-09
+       2        6.38797        0.00000
+       3        8.11785        0.00000
+       4        9.52164        0.00000
+       5        11.4455        0.00000
+       6        13.8680        0.00000
+
+ 246/256 kpoint (Cartesian) = 1.05000 1.05000 1.20000 (1221 pws)
+       1        4.01517    4.20604e-08
+       2        7.21054        0.00000
+       3        7.59392        0.00000
+       4        9.68217        0.00000
+       5        10.7674        0.00000
+       6        13.7943        0.00000
+
+ 247/256 kpoint (Cartesian) = 1.00000 1.15000 1.15000 (1218 pws)
+       1        4.90389        0.00000
+       2        5.45436        0.00000
+       3        8.05923        0.00000
+       4        9.51279        0.00000
+       5        11.9879        0.00000
+       6        13.1438        0.00000
+
+ 248/256 kpoint (Cartesian) = 1.05000 1.10000 1.15000 (1221 pws)
+       1        5.00104        0.00000
+       2        6.20299        0.00000
+       3        7.35718        0.00000
+       4        9.90758        0.00000
+       5        11.1383        0.00000
+       6        12.7674        0.00000
+
+ 249/256 kpoint (Cartesian) = 1.10000 1.10000 1.10000 (1219 pws)
+       1        5.89125        0.00000
+       2        5.89125        0.00000
+       3        6.67370        0.00000
+       4        10.6491        0.00000
+       5        10.6491        0.00000
+       6        12.2756        0.00000
+
+ 250/256 kpoint (Cartesian) = 1.00000 1.00000 1.20000 (1220 pws)
+       1        3.96217    2.39561e-07
+       2        8.00061        0.00000
+       3        8.00061        0.00000
+       4        8.77487        0.00000
+       5        10.2563        0.00000
+       6        13.7258        0.00000
+
+ 251/256 kpoint (Cartesian) = 1.00000 1.05000 1.15000 (1224 pws)
+       1        4.91583        0.00000
+       2        7.14079        0.00000
+       3        7.82474        0.00000
+       4        8.98918        0.00000
+       5        10.2592        0.00000
+       6        12.5568        0.00000
+
+ 252/256 kpoint (Cartesian) = 1.00000 1.10000 1.10000 (1224 pws)
+       1        5.77390        0.00000
+       2        6.22420        0.00000
+       3        7.76612        0.00000
+       4        9.10620        0.00000
+       5        10.5318        0.00000
+       6        11.9394        0.00000
+
+ 253/256 kpoint (Cartesian) = 1.05000 1.05000 1.10000 (1226 pws)
+       1        5.89177        0.00000
+       2        6.85857        0.00000
+       3        7.25908        0.00000
+       4        9.33009        0.00000
+       5        9.97008        0.00000
+       6        11.6872        0.00000
+
+ 254/256 kpoint (Cartesian) = 1.00000 1.00000 1.10000 (1240 pws)
+       1        5.85991        0.00000
+       2        7.64887        0.00000
+       3        7.64887        0.00000
+       4        8.42256        0.00000
+       5        9.55119        0.00000
+       6        11.5206        0.00000
+
+ 255/256 kpoint (Cartesian) = 1.00000 1.05000 1.05000 (1232 pws)
+       1        6.74124        0.00000
+       2        7.01552        0.00000
+       3        7.59024        0.00000
+       4        8.67085        0.00000
+       5        9.21273        0.00000
+       6        11.0762        0.00000
+
+ 256/256 kpoint (Cartesian) = 1.00000 1.00000 1.00000 (1264 pws)
+       1        7.53162        0.00000
+       2        7.53162        0.00000
+       3        7.53162        0.00000
+       4        8.30512        0.00000
+       5        8.30512        0.00000
+       6        10.7565        0.00000
+
+
+
+ --------------------------------------------
+ !FINAL_ETOT_IS -24.21363616165752 eV
+ --------------------------------------------
+
+
+
+
+
+
+  |CLASS_NAME---------|NAME---------------|TIME(Sec)-----|CALLS----|AVG------|PER%-------
+                                      total         147.51        17       8.7   1.0e+02%
+                 Driver         driver_line         147.50         1   1.5e+02    1.e+02%
+               PW_Basis      setuptransform        0.11488         1      0.11     0.078%
+          ESolver_KS_PW                 Run         146.83         1   1.5e+02    1.e+02%
+              Potential  update_from_charge        0.49807        13     0.038      0.34%
+              Potential           cal_v_eff        0.49629        13     0.038      0.34%
+               PW_Basis          real2recip        0.15169       128    0.0012      0.10%
+                  PotXC           cal_v_eff        0.45543        13     0.035      0.31%
+          XC_Functional                v_xc         80.197         7       11.       54.%
+          XC_Functional          v_xc_libxc        0.45399        13     0.035      0.31%
+              HSolverPW               solve         146.18        12       12.       99.%
+        DiagoIterAssist      diagH_subspace         33.843      3072     0.011       23.%
+             OperatorPW                hPsi         135.47     56813    0.0024       92.%
+               Operator          EkineticPW        0.54679     56813   9.6e-06      0.37%
+               Operator              VeffPW         134.51     56813    0.0024       91.%
+             PW_Basis_K          recip2real         67.183     75578   0.00089       46.%
+             PW_Basis_K    gathers_scatterp         5.4653     75578   7.2e-05       3.7%
+             PW_Basis_K          real2recip         59.500     72173   0.00082       40.%
+             PW_Basis_K    gatherp_scatters         2.5997     72173   3.6e-05       1.8%
+        DiagoIterAssist     LAPACK_subspace        0.30092      3072   9.8e-05      0.20%
+                DiagoCG           diag_once         108.16      3072     0.035       73.%
+            ElecStatePW            psiToRho         3.1710        12      0.26       2.1%
+ ----------------------------------------------------------------------------------------
+
+ CLASS_NAME---------|NAME---------------|MEMORY(MB)--------
+                                         36.67
+             wavefunc                 psi          29.62
+        Charge_Mixing                Rrho          1.648
+        Charge_Mixing               dRrho          1.442
+        Charge_Mixing                drho          1.442
+ ----------------------------------------------------------
+
+ Start  Time  : Wed Dec 28 12:38:34 2022
+ Finish Time  : Wed Dec 28 12:41:01 2022
+ Total  Time  : 0 h 2 mins 27 secs 
