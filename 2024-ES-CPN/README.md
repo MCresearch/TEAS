@@ -1,0 +1,5 @@
+# Multi-channel machine learning based nonlocal kinetic energy density functional for semiconductors
+
+DOI: https://doi.org/10.1088/2516-1075/ad8b8c
+
+The recently proposed machine learning-based physically-constrained nonlocal (MPN) kinetic energy density functional (KEDF) can be used for simple metals and their alloys (Sun and Chen 2024 Phys. Rev. B 109 115135). However, the MPN KEDF does not perform well for semiconductors. Here we propose a multi-channel MPN (CPN) KEDF, which extends the MPN KEDF to semiconductors by integrating information collected from multiple channels, with each channel featuring a specific length scale in real space. The CPN KEDF is systematically tested on silicon and binary semiconductors. We find that the multi-channel design for KEDF is beneficial for machine-learning-based models in capturing the characteristics of semiconductors, particularly in handling covalent bonds. In particular, the CPN5 KEDF, which utilizes five channels, demonstrates excellent accuracy across all tested systems. These results offer a new path for generating KEDFs for semiconductors. 
